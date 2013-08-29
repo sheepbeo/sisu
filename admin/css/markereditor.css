@@ -1,0 +1,240 @@
+
+.markereditor{
+	width:300px;
+	height: 420px;
+}
+
+.markereditor .nameheader{
+	height: 64px;
+	width: 100%;
+}
+
+.markereditor .nameheader input{
+	width: 100%;	
+	height: 48px;
+	text-align: center;
+	font-size: 16pt;	
+	border: none;
+	border-bottom: 1px solid #252424;
+}
+
+
+.markereditor .input-container{
+	width: 100%;
+	text-align: right;
+	position: relative;
+}
+
+.markereditor .input-container input{
+	width: 60%;
+	margin-left: 10%;
+	margin-right: 10%;
+	display: inline-block;
+	vertical-align: baseline;
+	margin-top: 5px;
+}
+
+.markereditor img.input-icon{
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.markereditor .nameheader input:hover{
+	background: #eee;
+}
+
+.markereditor .horizontal_selectlist{	
+	width: 100%;
+	height: 72px;
+	overflow-y: scroll;
+	/*
+	background-color: #eee;
+-webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.6);        
+     */
+        box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.3);	
+}
+
+.markereditor .latlnginput-container{
+	margin-bottom: 20px;
+}
+
+.markereditor .latlnginput-container p{
+	width: 30%;	
+	display: inline-block;
+	margin: 5px;
+	text-align: right;
+}
+.markereditor .latlnginput-container input{
+	width: 60%;
+	font-size: 10pt;
+	border: none;
+	border-bottom: 1px solid #51b8df;
+	display: inline-block;
+}
+.markereditor .colorlist{
+	margin-top: 20px;
+	height: 58px;
+}
+
+.colorlist ul li{
+	margin-top: 10px;	
+}
+
+.markereditor .dropinput-container{
+	width: 100%;
+	
+	text-align: center;
+}
+.markereditor .dropinput{
+	margin-top: 20px;
+	display: inline-block;	
+	width: 96px;
+	height: 96px;
+	border:4px solid #000;
+	margin: 15px;
+	margin-bottom: 25px;
+
+	position: relative;
+}
+
+.markereditor .dropinput:hover{
+	border: 4px solid #d00;	
+}
+
+.targetinput-hover{
+	border: 4px solid #d00;
+}
+
+
+.dropinput{	
+	position: relative;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+}
+
+.dropinput.imageinput{
+	background-image:url('../img/MD-photo.png');	
+}
+
+.dropinput.targetinput{
+	background-image:url('../img/target.png');	
+}
+
+
+.markereditor .bottombar{
+	position: absolute;
+	bottom: 25px;
+	height: 64px;
+	width: 100%;
+	
+}
+
+.horizontal_selectlist ul{
+	min-width: 100%;	
+	text-align: center;
+}
+
+.horizontal_selectlist ul li{
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0px;
+	margin: 5px;
+	border: 8px solid transparent;
+}
+
+.horizontal_selectlist ul li:hover{
+	border:8px solid #eee;
+
+}
+
+.horizontal_selectlist ul li.selected{
+	border:8px solid #d00;
+}
+
+
+.leaflet-popup-content-wrapper {
+-moz-border-radius: 0px;
+-webkit-border-radius: 0px;
+border-radius: 0px;
+}
+
+ul.colorlist{
+	margin-top: 10px;
+}
+
+.colorpick{
+	position: relative;
+}
+
+.colorpick_item{
+	position: relative;
+	width: 32px;
+	height: 32px;
+	display: inline-block;
+	margin-left: 5px;	
+	border:2px solid transparent;
+	-webkit-transition-duration:0.2s;
+-webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0,0.2);        
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+
+}
+
+.colorpick_item:hover, .colorpick_item.selected{
+	border: 2px solid #fff;
+	-webkit-transition-duration:0.2s;
+-webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0,0.8);        
+        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.8);
+
+}
+
+p.label{
+	font-size: 12px;
+	color: #777;
+	margin-top: 10px;
+}
+
+.bottombar{
+	text-align: center;
+}
+
+.markerEditor img.button{
+	height: 48px;
+	width: 48px;
+	margin: 5px;
+	border-radius: 64px;
+}
+
+
+
+.editorwindow.lineeditor{
+
+}
+
+.editorwindow.lineeditor input{
+	width: 90%;
+	margin-left: 5%;
+	font-size: 10pt;
+	font-weight: bold;
+	padding: 3px;
+	border: 1px solid lightgrey;
+	text-align: center;
+}
+
+.editorwindow.lineeditor .label{
+	padding: 2px;
+	font-size: 10pt;
+}
+
+.editorwindow.lineeditor .container img.button{
+	position: relative;
+	left: 50%;
+	margin-left: -32px;
+	margin-top: 10px;
+}
+
+ul.colorlist{
+	text-align: center;
+}

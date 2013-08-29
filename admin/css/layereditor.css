@@ -1,0 +1,77 @@
+.layereditor{
+
+}
+
+.layereditor .header{
+	height: 32px;
+}
+
+.layereditor .header h2{
+	margin-top: 5px;
+}
+
+
+.layereditor .container input,.layereditor .container textarea{
+	margin-left: 10px;
+	margin-top: 10px;
+	display: inline-block;
+	position: absolute;
+	top: 30px;
+	left: 122px;
+	width:270px;
+}
+
+.layereditor .container .buttoncontainer{
+	position: absolute;
+	top: 20px;
+	right:0px;
+	width: 64px;
+}
+
+.layereditor .container .buttoncontainer img{
+	width: 48px;
+	height: 48px;
+	margin-top:10px;
+}
+
+
+.layereditor .container .layernameinput{	
+	background-color: #eee;
+	height: 32px;
+	font-size: 12pt;
+}
+
+.layereditor .container .layerdescinput{
+	background-color: #eee;
+	height: 64px;
+	font-size: 10pt;
+	top: 66px;
+}
+
+.layereditor .container .imageinput {
+	display: inline-block;
+	width: 96px;
+	height: 96px;
+	margin-left: 20px;
+	border: 1px solid #999;
+	position: absolute;
+	top: 40px;
+}
+
+.editorwindow.layereditor .langselector.container{
+	height: 32px;
+	text-align: center;
+	position: relative;
+	margin: 10px;
+	
+}
+
+.editorwindow.layereditor .langselector button{
+	padding: 0px;
+	font-size: 10pt;
+	
+	margin: 0px;
+	margin-left: 10px;
+	max-width: 70px;
+	height: 26px;
+}

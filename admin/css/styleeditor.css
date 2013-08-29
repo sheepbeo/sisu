@@ -1,0 +1,39 @@
+.inputcontainer{
+	width:95%;
+	margin-left: 2%;
+	padding:10px;
+	text-align: center;
+	position: relative;
+}
+
+.inputcontainer input, .inputcontainer select, .inputcontainer textarea{
+	width:70%;
+	padding: 5px;
+}
+
+input[type="color"]{
+	height: 32px;
+	padding: 0px;
+}
+
+div.inputitem{
+	display: inline-block;
+	width:70%;
+	padding: 5px;
+	height: 128px;
+}
+
+p.input_caption{
+	display: inline-block;
+	color: #252424;
+	width:15%;
+	text-align: right;
+	font-size: 10pt;
+	margin-right: 20px;
+}
+
+.inputset_header{
+	padding: 10px;
+	margin-top: 20px;
+	margin-left: 50px;
+}

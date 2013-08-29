@@ -1,0 +1,74 @@
+#logo{
+	position: absolute;
+	z-index: 100;
+	background-color: #252424;
+	text-align: center;
+	color: #ddd;
+	height: 90px;
+	text-decoration: none;
+	overflow: hidden;
+}
+
+#logo img{
+	display: inline-block;
+	position:absolute;
+	left: 8px;
+	top: 8px;
+	width: 48px;
+	height: 48px;
+}
+
+#logo h2{
+	font-size: 12pt;
+	text-transform: uppercase;
+	padding:10px;	
+	color: #eee;
+	
+	margin-top: 13px;
+	margin-left: 64px;
+}
+
+#logo p{
+	position: absolute;
+	width: 90%;
+	margin-left: 5%;
+	top: 66px;
+	font-size: 10pt;
+	color: #eee;
+	text-align:center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+#logo.left-top{
+	top: 0px;
+	left: 0px;	
+}
+
+#logo.right-top{
+	top: 0px;
+	right: 0px;
+}
+
+#logo.left-bottom{
+	bottom: 0px;
+	left: 0px;
+}
+
+#logo.right-bottom{
+	bottom: 0px;
+	right: 0px;
+}
+
+/*
+#logo.center-bottom{
+	bottom: 0px;
+	left: 50%;
+}
+
+#logo.center-top{
+	top: 0px;
+	left: 50%;
+}
+*/

@@ -1,0 +1,11 @@
+Customizable Map presentation program
+
+The main intention is to make a easy to use, simply customizable map presentation software.
+this program is customizable through separate admin interface https://github.com/heikkipesonen/newAdmin
+
+
+PLUGINS
+jQuery,
+iScroll,		
+Leaflet.markercluster Smartrak, David Leaver,
+handy marker clusterer for leaflet to present larger amount of data at one layer

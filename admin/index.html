@@ -1,0 +1,273 @@
+<html>
+	<head>
+		<meta charset="utf8">
+			<script>L_NO_TOUCH = true;</script>
+
+			<script type="text/javascript" src="../lib/jquery-1.7.2.min.js"></script>
+			<script type="text/javascript" src="../lib/jqueryui/js/jquery-ui-1.8.21.custom.min.js"></script>	
+			<link rel="stylesheet" href="css/reset.css" />
+
+			<link rel="stylesheet" href="../leaflet/dist/leaflet.css" />			
+			<link rel="stylesheet" href="css/admin.css" />
+			<link rel="stylesheet" href="css/editorwindow.css" />
+			<link rel="stylesheet" href="css/markereditor.css" />
+			<link rel="stylesheet" href="css/lineeditor.css" />
+			<link rel="stylesheet" href="css/layereditor.css" />
+			<link rel="stylesheet" href="css/pageeditor.css" />
+			<link rel="stylesheet" href="css/repobrowser.css" />
+			<link rel="stylesheet" href="css/imgupload.css" />
+			<link rel="stylesheet" href="css/styleeditor.css" />
+			<link rel="stylesheet" href="css/picker.css" />
+			<link rel="stylesheet" href="css/menueditor.css" />
+			<link rel="stylesheet" href="css/langselect.css" />
+			<link rel="stylesheet" href="css/list.css" />
+
+			<script type="text/javascript" src="../leaflet/dist/leaflet-src.js"></script>
+			<script type="text/javascript" src="../leaflet/Bing.js"></script>
+			<script type="text/javascript" src="../lib/proj4js-compressed.js"></script>			
+			<script type="text/javascript" src="../lib/modernizr.js"></script>
+			<script type="text/javascript" src="../lib/OpenLayers.js"></script>
+			<script type="text/javascript" src="../lib/RotatedImageOverlay.js"></script>
+
+			<script type="text/javascript" src="../definitions.js"></script>
+			<script type="text/javascript" src="../db.js"></script>
+			<script type="text/javascript" src="leaflet_extend.js"></script>
+			<script type="text/javascript" src="map.js"></script>
+			<script type="text/javascript" src="layereditor.js"></script>
+			<script type="text/javascript" src="list.js"></script>
+			<script type="text/javascript" src="actions.js"></script>
+			<script type="text/javascript" src="editorwindow.js"></script>
+			<script type="text/javascript" src="imageupload.js"></script>
+			<script type="text/javascript" src="mapselect.js"></script>
+			<script type="text/javascript" src="markereditor.js"></script>
+			<script type="text/javascript" src="lineeditor.js"></script>
+			<script type="text/javascript" src="imageinput.js"></script>
+			<script type="text/javascript" src="markerlist.js"></script>
+			<script type="text/javascript" src="misc.js"></script>
+			<script type="text/javascript" src="loadingdialog.js"></script>
+			<script type="text/javascript" src="pageeditor.js"></script>
+			<script type="text/javascript" src="browser.js"></script>
+			<script type="text/javascript" src="styleeditor.js"></script>
+			<script type="text/javascript" src="inputset.js"></script>
+			<script type="text/javascript" src="picker.js"></script>
+			<script type="text/javascript" src="polygoneditor.js"></script>
+			<script type="text/javascript" src="menueditor.js"></script>
+			<script type="text/javascript" src="targetinput.js"></script>
+			<script type="text/javascript" src="boundseditor.js"></script>
+			<script type="text/javascript" src="imagemarker.js"></script>
+			<script type="text/javascript" src="overlayeditor.js"></script>
+			<script type="text/javascript" src="langselector.js"></script>
+
+	</head>
+<body>
+
+<script type="text/javascript">
+
+	var langs = ['fin','en','swe'];
+
+	var NAME_ELLIPSIS_LENGTH = 20;
+	//var layers = Array();
+	//var editor = false;
+	//var layerList = new list();
+	//layerList.addItem(item);
+
+	var titleImage = false;
+
+	//var d = new styleEditor();
+	//d.show();
+
+
+	$(document).ready(function(){
+
+			$('.imagepickerfield').live('click',function(){
+
+				var multi = $(this).hasClass('multi-image');
+				var me = $(this);
+
+				var e = new imgPicker({multi:multi},function(e){					
+					me.attr('data',escape(JSON.stringify(e)));
+					me.empty();
+					for (var i in e){
+						me.append('<img src="'+getImage(e[i],[96,96])+'" />');
+					}
+
+				});
+
+				if ($(this).attr('data') != ''){
+					e.load(JSON.parse( unescape( $(this).attr('data') )));
+				}
+			});
+	
+			var wrap = document.getElementById('wrapper');
+			wrap.addEventListener('drop',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				actions.dropImage(e);				
+			});
+
+			actions.showtoolbar('tools');
+	
+			$('#toolbar ul li, .btn').live('click',function(e){
+				e.stopPropagation();
+
+
+				if (!$(this).attr('disabled')){
+					if ($(this).attr('data-action')){
+						var act = getAction($(this));
+						
+						if ($(this).hasClass('selected') && $(this).hasClass('toggle-action')){
+							$(this).removeClass('selected');
+							actions[act[0]](false);
+
+						} else if (act[0]!=undefined && act[1]!=undefined && actions[act[0]]!=undefined){						
+							var result = actions[act[0]](act[1],$(this));
+							
+							if ($(this).hasClass('togglebutton')){						
+								if (result == false && !$(this).hasClass('dimmed')){
+									$(this).addClass('dimmed');
+								} else if (result == true) {
+									$(this).removeClass('dimmed');
+								}
+							}
+						}
+					}
+				}
+			});
+
+			$('.listheader, .border-toggler').click(function(){
+				$(this).parent().toggleClass( $(this).parent().attr('data'));
+			});
+
+			map.set('map');
+
+			actions.setImageInput();
+			actions.layerList.addTo('#layerlist');
+	
+			$('#title').keyup(function(){
+				setName($(this).text())
+			});
+
+
+			actions.selectbasemap('openstreetmap');
+
+			/*
+
+			search('type:itemcollection OR type:page',function(result){				
+				for (var i in result){					
+					actions.loadItem(result[i]);
+				}
+			});
+			*/
+			
+
+			//var p  = new imgPicker({multi:true});
+	});
+
+
+	function name_ellipsify(text){		
+		if (text.length>NAME_ELLIPSIS_LENGTH){
+			text = text.substring(0,NAME_ELLIPSIS_LENGTH-3);
+			text = text + '...';
+		}
+		return text;
+	}
+
+
+	function setName(name){
+
+		$('.nametext').text(name_ellipsify(name));
+	}
+
+</script>
+
+<div id="wrapper">
+	<div id="map">
+	</div>
+
+	<div id="header" data="hide-up">		
+		<div id="title" contentEditable="true">Presentation title</div>
+		<div id="description" contentEditable="true">Write a short description about this presentation and its contents for public.This is not supposed to be a complete story of this thing but a few words about it and what this is all about. This text will be visible in front page when public site user will be selecting presentation, or a n presentation. blaablaablaa...</div>
+
+		<div class="center-text border-toggler"><p class="nametext">Presentation title</p></div>
+	</div>
+
+
+
+	<div id="layers" class="itemwindow container" data="hide-left">
+		<div class="listheader row container">
+			<img src="img/box.png"></img>
+			<div class="header_textcontainer">
+				<h3 class="nametext">presentation</h3><h3>/</h3><h3 class="black">items</h3><p class="grey">Collections of different objects that build up the presentation</p>
+			</div>
+		</div>
+		
+		<div id="layerlist" class="list">
+			<!-- <img class="btn" action="layercreate:new" src="img/add.png"></img> -->
+		</div>
+	</div>
+
+
+	<div id="properties" class="itemwindow" data="hide-right">		
+		<div class="listheader">
+			<img src="img/fill.png"></img>
+			<div class="header_textcontainer">
+				<h3 class="nametext">presentation</h3><h3>/</h3><h3 class="black">properties</h3><p class="grey">set up presentation properties, import styles, setup base map etc</p>
+			</div>
+		</div>
+
+		<div class="list" id="proplist">
+			<div class="listtable">
+				<div class="btn row" id="basemap" data-action="select:basemaplayer">
+					<div class="img"><img id="basemapimage" src="img/map.png"></img></div><div class="text"><h3>basemap/</h3><h3 id="basemapname" class="black">n/a</h3><p id="basemapdescription" class="grey">select the base map layer</p></div>
+				</div>
+
+
+				<div class="btn row" id="theme" data-action="select:theme">
+					<div class="img"><img id="themelogo" src="img/fill.png"></img></div><div class="text"><h3>theme/</h3><h3 id="themename" class="black">n/a</h3><p id="themedescription" class="grey">select theme</p></div>
+				</div>
+
+				<div class="btn row" id="menu" data-action="select:menu">
+					<div class="img"><img id="menulogo" src="img/hierarchy.png"></img></div><div class="text"><h3>menu/</h3><h3 id="menuname" class="black">n/a</h3><p id="themedescription" class="grey">Main menu</p></div>
+				</div>
+
+				<div class="btn row" id="maplimiter" data-action="select:limiter">
+					<div class="img"><img src="img/full-screen-alt-3.png"></img></div><div class="text"><h3>limiter/</h3><h3 id="limiter_status" class="black">n/a</h3><p id="themedescription" class="grey">Presentation map limiter</p></div>
+				</div>
+
+				<div class="btn row" id="publish" data-action="publish:this">
+					<div class="img"><img id="publish" src="img/announce.png"></img></div><div class="text"><h3>publish/</h3><h3 id="ispublic" class="black">private</h3><p id="publishedtext" class="grey">Make this project visible to others</p></div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div id="toolbar">
+
+		<ul id="tools" class="tools">
+			<li class="tooltip" data-action="picker:presentation" data-callback="loadProject"><img src="img/download.png"></img><span>Load project</span></li>
+			<li class="tooltip" data-action="picker:itemcollection,page" data-opts="multi:true" data-callback="loadItem"><img src="img/database-download.png"></img><span>import from repository</span></li>		
+			<li class="tooltip" data-action="createItem:pages"><img src="img/book.png"></img><span>create pages</span></li>			
+			<!-- <li class="tooltip" data-action="imgupload:images"><img src="img/MD-photo.png"></img><span>upload images</span></li> -->			
+			<li class="tooltip" data-action="addLayer:layer"><img src="img/box.png"></img><span>create collections</span></li>					
+			<li class="tooltip" data-action="saveProject:layer"><img src="img/save.png"></img><span>Save project</span></li>		
+		</ul>
+
+		<ul id="layertools" class="tools">
+			<!-- showtoolbar:tools -->
+			<!-- <li data-action=""><img src="img/arrow-1-left.png"></img><span>go back</span></li>			-->
+			<li class="tooltip toggle-action" data-action-type="toggle" data-action="editoradd:marker"><img src="img/map-marker-pin.png"></img><span>marker pins</span></li>			
+			<li class="tooltip" data-action="editoradd:overlay" ><img src="img/MD-photo.png"></img><span>overlay image</span></li>
+			<li class="tooltip" data-action="editoradd:tilelayer"  disabled="true"><img src="img/map.png"></img><span>map tile layer</span></li>		
+			<!-- <li class="tooltip" data-action="editoradd:polyline"   disabled="true"><img src="img/node.png"></img><span>polyline</span></li>-->
+			<li class="tooltip" data-action="importItems:marker"><img src="img/database-download.png"></img><span>import</span></li>		
+			<li class="tooltip" data-action="editorToggleBounds:bounds"><img src="img/full-screen-alt-3.png"></img><span>set bounds</span></li>		
+			
+		</ul>
+
+	</div>
+</div>
+
+</body>
+</html>

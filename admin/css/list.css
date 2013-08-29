@@ -1,0 +1,142 @@
+
+.list{
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	overflow-y:scroll;
+	height: 90%;
+}
+
+
+
+.listtable{
+	-webkit-user-select:none;
+	width: 98%;	
+	margin-top: 5px;
+	margin-left: 1%;
+}
+
+.listtable div.row .btn{
+	display: none;
+}
+.listtable div.row{	
+	position: relative;
+	border-bottom: 1px dashed #ddd;
+	-webkit-transition-duration:0.1s;
+}
+
+.listtable div.row:hover{	
+	cursor: pointer;
+	background: #252424;
+	-webkit-transition-duration:0.1s;
+}
+
+.listtable div.row:hover .btn{
+	display: block;
+}
+
+
+.listtable div.row:hover .black{
+	color: #ddd;
+	-webkit-transition-duration:0.1s;
+}
+
+
+.listtable div.row div{
+	vertical-align: top;
+	padding: 5px;
+	display: inline-block;	
+	overflow: hidden;
+}
+
+.listtable div.row .text{
+	width: 287px;
+}
+
+#layerlist .listtable div.row .text{
+	width: 270px;
+}
+
+.listtable h3{
+	display: inline-block;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	overflow: hidden;
+	font-size: 12pt;
+	margin-top: 10px;	
+}
+
+
+
+.editorwindow .listtable div.row .text{
+	width: 80%;
+}
+
+.editorwindow .listtable h3{
+	max-width: 80%;
+}
+
+#layerlist h3{
+	max-width: 80%;
+}
+
+#layerlist .row{
+	height: 52px;
+}
+
+#layerlist .img img{
+	height: 48px;
+	width: 48px;
+}
+
+
+.listtable p{
+	white-space: nowrap;	
+	text-overflow:ellipsis;
+	overflow: hidden;		
+	width: 100%;
+	font-size: 8pt;
+}
+
+.listtable td.img{
+	width: 96px;	
+}
+
+.listtable img{
+	width: 50px;
+	height: 50px;
+	
+	background-color: #fff;
+}
+
+.item_buttons{
+	position: absolute;
+	top: -3px;
+	right: 0px;
+	height: 32px;
+	width: 64px;
+}
+.item_buttons .btn{
+	width: 24px;
+	height: 24px;
+	display: block;
+	border: 1px solid #777;
+
+	position: absolute;
+}
+
+.item_buttons .edit{
+	left:0px;
+}
+
+.item_buttons .delete{
+	left:34px;
+}
+
+.green img{
+	background-color: rgba(0,150,0,0.3);
+}
+
+.green:hover img{
+	background-color: rgba(0,150,0,1);
+}

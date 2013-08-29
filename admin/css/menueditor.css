@@ -1,0 +1,45 @@
+ul.menuinput{
+	width: 80%;
+	margin-left: 10%;
+}
+
+.menuiteminput{
+	height: 80px;
+	position: relative;
+	padding:10px;
+	vertical-align: middle;
+	-webkit-transition-duration:0.15s;
+}
+
+.menuiteminput:hover{
+	background-color: #dedede;
+	-webkit-transition-duration:0.15s;
+}	
+
+.menuiteminputcontainer input,.menuiteminputcontainer select{
+	width: 20%;
+	margin: 10px;
+}
+
+.menuiteminput img{
+	border: 8px solid #ededed;
+	display: inline-block;
+	height: 64px;
+	width: 64px;
+    box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 1);	
+}
+
+.menuiteminput img:hover{
+	border: 8px solid #ededed;
+}
+
+
+.menuiteminput .menuiteminputcontainer{
+	display:inline-block;
+	position: relative;
+	top: -40px;
+	left: 40px;
+	width: 80%;
+}
+
+.

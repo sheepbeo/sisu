@@ -1,0 +1,67 @@
+.editorwindow{
+	overflow: hidden;	
+}
+.editorwindow .container{
+	overflow:hidden;
+}
+
+
+.imageupload > .container  > .images.dragbox{
+	margin-top: 20px;
+}
+
+.img_listobject{
+	width: 192px;
+	height: 96px;
+	margin: 10px;
+	padding: 10px;
+	border: 2px solid transparent;
+	border-left: 8px solid #51b8df;
+	position: relative;
+	display: inline-block;
+	border-radius: 8px;
+	overflow: hidden;
+	-webkit-transition-duration:0.2s;
+}
+
+.img_listobject:hover{
+	border: 2px dashed #51b8df;
+	border-left: 8px solid #d00;
+	-webkit-transition-duration:0.2s;
+}
+
+.img_listobject img{
+	width: 64px;
+	height: 64px;
+	border: 8px solid #dedede;
+	display: inline-block;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+.img_listobject > .textcontainer{
+	position: absolute;
+	top: 15px;
+	left: 90px;	
+	overflow: hidden;
+	display: inline-block;
+	padding: 10px;
+}
+
+.bottom_tools{
+	position: absolute;
+	bottom: 0px;
+	height: 120px;
+	width: 100%;
+	text-align: center;
+	margin-top: 30px;
+	background-color: #aaa;
+-webkit-box-shadow: inset 0px 10px 30px -10px rgba(0, 0, 0, 1);
+        
+        box-shadow: inset 0px 10px 30px -10px rgba(0, 0, 0, 1);
+}
+
+.bottom_tools li{
+	margin-top: 10px;
+}
