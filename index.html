@@ -112,8 +112,13 @@
 	function startPresentation(id) {
 		clearView();
 		$("#launchPage").show();
-
 		$("#launchButton").click(function(){console.log("Here we are!"); launchPresentationMainScreen(id)});
+
+		getData(id, function(data) {
+			$("#launchPageHeader").text(getText(data.properties.name));
+			$("#launchPageText").text(getText(data.properties.description));
+			$("#launchPageImage").attr("src", $(getImageElement(data.properties.image)).attr("src"));
+		});
 	}
 
 
@@ -206,7 +211,7 @@
 <div id="launchPage" style="display:none">
     <h1 id = "launchPageHeader" class="launchPageHeader"> header </h1>
     <div class="launchPageContent">
-	    <img src= "http://touch.mobile.metropolia.fi/image.php?img=boat.jpg&x=64&y=64" id = "launchPageImage" class="launchPageImage"> </img>
+	    <img src= "http://touch.mobile.metropolia.fi/image.php?img=boat.jpg&x=128&y=138" id = "launchPageImage" class="launchPageImage"> </img>
 
 	    <p id = "launchPageText" class="launchPageText">
 	    	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum augue in consectetur auctor. Praesent congue nisl lorem, a dapibus lacus viverra non. Mauris fringilla eleifend sagittis. Aliquam erat volutpat. Nulla vel varius purus. Nam magna ipsum, tincidunt in accumsan sed, venenatis sed dolor. Nullam tristique nunc arcu. Nam vel lacinia nisi.
