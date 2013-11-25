@@ -75,7 +75,13 @@ var select = {
 			$('#limiter_status').text('disabled');
 			$('#maplimiter').removeClass('green');
 		}
+	},
+	
+	overviewslide: function() {
+		var e = new overviewslideselect();
+		e.show();
 	}
+	
 }
 
 var actions = {

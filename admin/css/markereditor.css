@@ -87,7 +87,7 @@
 	
 	text-align: center;
 }
-.markereditor .dropinput{
+.dropinput{
 	margin-top: 20px;
 	display: inline-block;	
 	width: 96px;
@@ -99,7 +99,7 @@
 	position: relative;
 }
 
-.markereditor .dropinput:hover{
+.dropinput:hover{
 	border: 4px solid #d00;	
 }
 
