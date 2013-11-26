@@ -111,6 +111,7 @@
 	//now this just shows presentation introduction page, from where user can actually launch the presentation itself (launchPresentationMainScreen() )
 	function startPresentation(id) {
 		clearView();
+		$("#wrapper").hide();
 		$("#launchPage").show();
 		$("#launchButton").click(function(){console.log("Here we are!"); launchPresentationMainScreen(id)});
 
@@ -124,17 +125,16 @@
 
 	function launchPresentationMainScreen(id){
 		if (typeof(id) == 'string'){
+			$("#wrapper").show();
 			var p = new presentation(id);	
 			if (p) {
 				clearView();
-				$("#wrapper").show();
 			}
 		}
 	}
 
 	//clears the elements before launching the presentation
 	function clearView() {
-		$("#wrapper").hide();
 		$("#launchPage").hide();
 
 		$('#header').remove();
