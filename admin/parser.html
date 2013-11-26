@@ -1,0 +1,363 @@
+<!-- lesley.kadish@gmail.com -->
+<html>
+	<head>
+		<meta charset="utf8">
+			<script type="text/javascript" src="../lib/jquery-1.7.2.min.js"></script>
+			<script type="text/javascript" src="../lib/proj4js-compressed.js"></script>						
+	
+
+
+<script type="text/javascript">
+
+
+//var CORDSYS ='EPSG:3067';
+
+function bulkUpload(data,callback){	
+	var uData = '';
+	for (var i in data){		
+		var index = data[i].type;
+		uData += '{index:"'+index+'"}\n'+JSON.stringify(data[i])+'\n';
+	}
+
+	$.ajax({
+		url: DBURL + index + '/_bulk',
+	    type: 'POST',
+	    data: uData,
+	    dataType: 'JSON',
+   		contentType: 'application/json',
+	    success: function(response){
+	    	callback(response);
+	   	},
+	    error:function(data){
+	    	callback(data);
+	    }            
+	});
+
+}
+
+
+function convCoord(kkj) {
+	//var p = kkj.split(',');
+	var p = kkj;
+	var source = new Proj4js.Proj(CORDSYS);
+	var dest = new Proj4js.Proj('WGS84');
+	var p = new Proj4js.Point(p[0], p[1]);
+	Proj4js.transform(source, dest, p);
+	return [p.y, p.x];
+}
+
+function parseName(name){
+	var Nname = name.match(/[a-z0-9]+/i)
+	return Nname[0];
+}
+
+
+function csvparse(str){	
+	var data = str.split(/\n/g);	
+	var items = Array();
+	var line = 0;
+	$('#header_2').text(data.length);
+
+	for (var i in data){
+		if (line == 0 && HEADLINE == true){
+
+
+		} else {
+			if (LIMIT > 0){
+				LIMIT--;
+				var marker = parseLine(data[i]);
+					if (marker!=false){
+						items.push(marker);
+					}
+			} else {
+				break;
+			}
+		}
+		line++;
+	}
+	return items;
+}
+var si = 0;
+var prevData = '';
+
+function parseLine(str){
+	si++;	
+	//str.match(/[0-9]+\,[0-9]{3,}/g);
+	var data = str.match(/("(.*?)")|[0-9.]{1;}/g);
+
+	if (data != null && data!= undefined){
+		for (var i in data){
+			data[i]= data[i].replace(/\"|(,  ,  ,)|(,  ,)/g,'');
+		}
+
+		var coords = [parseFloat(data[COORDOFFSETS[0]]),parseFloat(data[COORDOFFSETS[1]])];
+		
+		if (data.length != prevData.length){
+			//console.log(prevData.length - data.length)
+		}
+
+		if (coords[0] == undefined || !$.isNumeric(coords[0])){
+			//console.log(data.length)
+			//console.log(prevData.length)
+			//console.log(si);
+			//console.log(str);
+			//console.log(coords)
+			
+
+			return false;
+		} else {
+			for (var i in coords){
+				if (typeof(coords[i]) == 'string'){
+					coords[i] = coords[i].replace(/\,/gi,'.');
+				}
+			}
+
+			prevData = data;
+
+			return makeMarker(data,coords);
+		}		
+	} else {
+		return false;
+	}
+}
+
+
+
+function setItems(items){
+		var markers = Array();
+		for ( var i in items){
+			var p = new L.LatLng(items[i].point.lat,items[i].point.lng);
+			var m = new L.Marker(p);
+
+			markers.push(m);
+		}
+		var group = new L.LayerGroup(markers);
+
+	return group;
+}
+
+//var DATABASE_URL = 'http://spagu.metropolia.fi/couchdb/karttademo';
+
+function loadCsv(filename){	
+	$.ajax({
+			url:filename,
+			type:'GET',			
+			success: function(data){
+				csvComplete( csvparse(data) );
+			}
+	});
+}
+
+
+
+function createTable(data){	
+	var table = '<table>';
+
+
+	for (var i in data){
+		if (i < TABLE_SIZE_LIMITER){
+			table += createRow(data[i]);
+		}
+	}
+	
+	table += '</table>';
+
+
+	return table;
+}
+
+
+function createRow(data){
+	var row = '<tr>';
+	for (var i in data){
+		row += createCell(i,data[i]);
+	}
+	row += '</tr>';
+	return row;
+}
+
+function createCell(f,data){	
+	var cell = '';
+	if (typeof(data) == 'object'){
+		for (var i in data){
+		  cell += createCell(i,data[i]);
+		}
+	} else {
+		cell = '<td><span>'+f+'</span><p>'+data+'</p></td>';	
+	}
+
+	return cell;
+}
+
+function makeMarker(data,coordinates){
+	
+	var wgs = [];
+
+	if ( FLIP_LATLNG == true){
+		wgs = convCoord([coordinates[1],coordinates[0]]);	
+	}  else {
+		wgs = convCoord(coordinates);
+	}
+
+	var origData= {};
+	var catData = {};
+	var b = 0;
+
+	for (var i in data){		
+		catData[HEADERS[i]] = data[i];
+	}
+
+	// DATA OBJECT CREATIONS asfsdafas dfasdf sadf sadf
+	var dta = {
+		type:'marker',
+		coordinates:{
+			lat:wgs[0],
+			lng:wgs[1]
+		},
+		data:catData,
+		properties:{
+			markericon:{},
+			icon:{},
+			name:{
+				en:catData.sitename,
+				fin:catData.sitename,
+				swe:catData.sitename
+			},
+			description:{
+				en:catData.description,
+				fin:catData.description,
+				swe:catData.description
+			},
+			timestamp:Date().now,
+			target:[],
+		}
+	}
+	return dta;
+}
+
+function csvComplete(data){
+	CSV = data;
+	$('#wrapper').append( createTable(data) );
+}
+
+
+
+
+var HEADERS = [];
+var COORDOFFSETS = [];
+var TABLE_SIZE_LIMITER = 101; // how many rows are shown in the preview table
+
+var FLIP_LATLNG = false;
+var HEADLINE = true;
+var DBURL = 'http://touch.mobile.metropolia.fi/es/datasets/'; // MAIN DATABASE URL
+var LIMIT = 50000; // not more than this many rows is parsed
+
+Proj4js.defs["EPSG:2392"] = "+proj=tmerc +lat_0=0 +lon_0=24 +k=1 +x_0=2500000 +y_0=0 +ellps=intl +units=m +no_defs";
+Proj4js.defs["EPSG:2393"] = "+proj=tmerc +lat_0=0 +lon_0=27 +k=1 +x_0=3500000 +y_0=0 +ellps=intl +units=m +no_defs";
+Proj4js.defs["EPSG:3067"] = "+proj=utm +zone=35 +ellps=GRS80 +units=m +no_defs";
+
+
+CORDSYS = 'EPSG:3067'; // crs used in data, will convert into wgs84
+FLIP_LATLNG = false;	// flip lat and long? lat,lng -> lng,lat
+COORDOFFSETS = [2,3]; // offset of coordinates in string
+HEADERS = ['sitename','city','x','y','description','timeperiod','type','subtype','excavated'];
+
+//kohdetunnus (Unique ID);Kohdenimi (site name);Kunta (city);x;y;Kuvaus (description);ajoitus (time period);Tyyppi (type);Alatyyppi (subtype);Kaivettu (excavated)
+
+//loadCsv('../dataset.csv');
+
+
+$(document).ready(function(){
+
+	var b = $('<button> import </button>');
+	b.css({
+		position:'fixed',
+		top:'20px',
+		right:'20px',
+		width:'96px',
+		height:'32px'
+	});
+
+
+	b.click(function(){
+		if (CSV){
+			bulkUpload(CSV,function(reply){
+				alert(JSON.stringify(reply));
+			});		
+		}
+	});
+
+	$('#wrapper').append(b);
+
+	document.addEventListener('drop',function(e){
+		e.preventDefault();
+		e.stopPropagation();
+
+		rf(e.dataTransfer.files[0],function(e){
+			csvComplete( csvparse(e) );
+		});
+
+
+		function rf(tfile,callback){
+			var reader = new FileReader();		
+			
+			reader.onload = function(file){
+				callback(file.currentTarget.result,tfile);
+			};
+			reader.readAsText(tfile);
+		}
+	});
+});
+
+
+
+
+
+
+
+
+
+
+</script>
+<style type="text/css">
+	a,p,td,span,h1,h3,h2{
+		font-family: arial;
+		margin: 0px;
+	}
+
+	td{
+		position: relative;
+		font-size: 10pt;
+		padding: 8px;
+	}
+
+	tr:nth-child(even){
+		background-color: #eee;
+	}
+
+	table{		
+		margin: 5%;
+		border-left: 1px solid #777;	
+		border-right: 1px solid #777;	
+	}
+
+	td span{
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		font-size: 8pt;
+	}
+
+	td p{
+		margin-top: 12px;
+	}
+
+</style>
+</head>
+<body>
+	<div id="header"><h1>parser</h1></div>
+	<div id="header_2"></div>
+	<div id="wrapper"></div>
+
+</body>
+</html>

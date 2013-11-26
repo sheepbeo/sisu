@@ -1,0 +1,233 @@
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta charset="utf8">
+			
+			<script type="text/javascript" src="./lib/jquery-1.8.3.min.js"></script>
+			<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCcz873EhxEgabRVhy1zMezaem9hoctdv4&sensor=false"></script>	
+
+			<link rel="stylesheet" href="./leaflet/dist/leaflet.css" />
+			<link rel="stylesheet" href="leaflet/minimap/Control.MiniMap.css" />
+			
+			<link rel="stylesheet" href="user/css/reset.css" />
+			<link rel="stylesheet" href="user/css/page.css" />
+			<link rel="stylesheet" href="user/css/presentation.css" />
+			<link rel="stylesheet" href="user/css/menu.css" />
+			<link rel="stylesheet" href="user/css/logobar.css" />
+			<link rel="stylesheet" href="user/css/icon.css" />
+
+
+			
+			<script type="text/javascript" src="db.js"></script>				
+			<script type="text/javascript" src="definitions.js"></script>
+			<script type="text/javascript" src="lib/hammer.js"></script>
+			<script type="text/javascript" src="lib/jquery.hammer.js"></script>
+
+			<script type="text/javascript" src="leaflet/dist/leaflet-src.js"></script>
+			<script type="text/javascript" src="leaflet/Google.js"></script>
+			<script type="text/javascript" src="leaflet/Bing.js"></script>	
+			<script type="text/javascript" src="lib/iscroll.js"></script>
+			<script type="text/javascript" src="lib/modernizr.js"></script>
+			<!--
+			<script type="text/javascript" src="../lib/leaflet.label.js"></script>
+			<link rel="stylesheet" href="../lib/leaflet.label.css" />
+			-->
+
+			<script type="text/javascript" src="user/draggable.js"></script>			
+					
+
+			<script type="text/javascript" src="user/presentation.js"></script>			
+			<script type="text/javascript" src="user/map.js"></script>
+			<script type="text/javascript" src="user/menu.js"></script>
+			<script type="text/javascript" src="user/page.js"></script>
+			<script type="text/javascript" src="user/style.js"></script>
+			<script type="text/javascript" src="user/markericon.js"></script>
+			<script type="text/javascript" src="user/layerloader.js"></script>
+			<script type="text/javascript" src="user/breadcrumbs.js"></script>
+			<script type="text/javascript" src="user/functions.js"></script>
+			<script type="text/javascript" src="user/history.js"></script>
+
+			<script type="text/javascript" src="leaflet/markercluster/leaflet.markercluster-src.js"></script>
+			<script type="text/javascript" src="leaflet/minimap/Control.MiniMap.js"></script>
+			<script type="text/javascript" src="user/leaflet-extension.js"></script>
+	</head>
+<script type="text/javascript">
+
+
+
+	function showList(){
+		var c = $('<div id="listcontainer" />');
+		$('#wrapper').append(c);
+
+		getPresentationsList(function(list){
+			var e = getLangList();
+			$('#wrapper').append(e);
+			c.append(list);
+		});
+	}
+
+	function hideList(){
+		$('#listcontainer').remove();
+	}
+
+	function getPresentationsList(callback){
+		var list = $('<div class="presentation_list" />');
+
+		searchbyUrl({q:'type:"presentation"',limit:5000},function(data){
+			data = sortByTimestamp(data);
+			for (var i in data){
+				if (data[i].public == true || data[i].public == 'true'){					
+					var e  = createPresentationItem(data[i]);		
+					list.append(e);
+					onTap(e);
+					e.click(function(){
+						startPresentation($(this).attr('id'));
+					});
+				}
+			}
+
+			callback(list);
+		});
+	}
+
+	function getPresentation(name,callback){
+		searchbyUrl({q:'type:"presentation" AND properties.name:"'+name+'"',limit:5},function(data){
+			if (data){
+				callback(data[0]);
+			} else {
+				callback(false);
+			}
+		});
+	}
+
+	function createPresentationItem(data){
+		var e = $('<div class="presentation_container" />')
+			.append(getImageElement(data.properties.image))
+			.append($('<h2 class="nametext">'+getText(data.properties.name)+'</h2>'))
+			.append($('<p class="description">'+getText(data.properties.description)+'</p>'))
+			.attr('id',data._id);
+		return e;
+	}
+
+	//now this just shows presentation introduction page, from where user can actually launch the presentation itself (launchPresentationMainScreen() )
+	function startPresentation(id) {
+		clearView();
+		$("#launchPage").show();
+		$("#launchButton").click(function(){console.log("Here we are!"); launchPresentationMainScreen(id)});
+
+		getData(id, function(data) {
+			$("#launchPageHeader").text(getText(data.properties.name));
+			$("#launchPageText").text(getText(data.properties.description));
+			$("#launchPageImage").attr("src", $(getImageElement(data.properties.image)).attr("src"));
+		});
+	}
+
+
+	function launchPresentationMainScreen(id){
+		if (typeof(id) == 'string'){
+			var p = new presentation(id);	
+			if (p) {
+				clearView();
+				$("#wrapper").show();
+			}
+		}
+	}
+
+	//clears the elements before launching the presentation
+	function clearView() {
+		$("#wrapper").hide();
+		$("#launchPage").hide();
+
+		$('#header').remove();
+		$('.langselect').remove();
+		$('#listcontainer').animate({
+			opacity:0,
+		},function(){
+			$(this).remove();
+		});
+	}
+
+	function hasLang(lang){
+		var found =false;
+		for (var i in langs){
+			if (langs[i] == lang){
+				found =true;
+			}
+		}
+		return found;
+	}
+
+	$(document).ready(function(){
+		$('body').bind('touchmove', function(event) { event.preventDefault() }); // ipad prevent
+		
+		var presentationName = window.location.search;	
+		
+		if (presentationName.substr(0,1) == '?'){
+			presentationName = presentationName.substr(1);
+
+			if (presentationName.match(/\&/gi)){
+
+				var name = presentationName.split('&')[0];
+				var lang = presentationName.split('&')[1];
+
+				if (hasLang(lang)){
+					LANG = lang;
+					presentationName = name;
+				} else {
+					showList();
+					return;
+				}
+			}
+
+			getPresentation(presentationName,function(e){
+				if (e){
+					startPresentation(e._id);
+				} else {					
+					showList();		
+				}
+
+			});
+		} else {
+			showList();
+		}
+		
+
+
+
+
+		
+	});
+
+
+
+
+</script>
+
+<body>
+<div id="wrapper">
+	<div id="header"><h1>SUSI</h1></div>
+	<div id="map"></div>
+</div>
+
+<div id="launchPage" style="display:none">
+    <h1 id = "launchPageHeader" class="launchPageHeader"> header </h1>
+    <div class="launchPageContent">
+	    <img src= "http://touch.mobile.metropolia.fi/image.php?img=boat.jpg&x=128&y=138" id = "launchPageImage" class="launchPageImage"> </img>
+
+	    <p id = "launchPageText" class="launchPageText">
+	    	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum augue in consectetur auctor. Praesent congue nisl lorem, a dapibus lacus viverra non. Mauris fringilla eleifend sagittis. Aliquam erat volutpat. Nulla vel varius purus. Nam magna ipsum, tincidunt in accumsan sed, venenatis sed dolor. Nullam tristique nunc arcu. Nam vel lacinia nisi.
+
+	Nam convallis ligula eu egestas molestie. Etiam hendrerit turpis eget leo malesuada commodo. Nulla facilisi. Nulla a semper diam. Nullam tincidunt rhoncus lectus, sed eleifend justo interdum id. Ut iaculis mauris lobortis lacus aliquam scelerisque. Nulla enim libero, tempor sit amet turpis id, egestas luctus diam. Cras nulla mi, bibendum vel iaculis ut, bibendum at augue. Nullam quis odio id dui pellentesque mollis. Proin vitae convallis tellus, et lacinia sem. Etiam et interdum orci.
+
+	    </p>
+    </div >
+
+   	<div id="launchButtonWrapper">
+   		<button id="launchButton"> Start </button>
+   	</div>
+</div>
+
+</body>
+</html>

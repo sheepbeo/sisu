@@ -1,0 +1,98 @@
+.repobrowser.editorwindow, .repobrowser.editorwindow > .container{
+	overflow:hidden;
+}
+
+.repobrowser > .container > .reposearchbar{
+	width: 100%;
+	text-align: center;
+	padding:15px;
+	margin-top: 20px;
+	padding-bottom: 20px;
+	/*border-bottom: 2px dashed #999;*/
+	position: relative;
+}
+
+.repobrowser > .container > .reposearchbar input{
+	padding: 8px;
+}
+
+.repobrowser > .container > .reposearchbar input#repoquerysize{
+	text-align: center;	
+}
+.repobrowser > .container > .reposearchbar input#reposearch{
+	width: 80%;
+	color: #252424;
+	font-weight: bold;
+}
+
+.repobrowser > .container > .reporesult{
+	position: relative;
+	width: 98%;
+	margin-left: 1%;
+	height: 58%;
+	border: 1px dashed #999;
+	border-radius: 8px;
+	overflow-y:scroll;
+}
+
+.reporesultTable{
+	padding:10px;
+	width: 100%;	
+	color: #252424;
+}
+
+.reporesultTable tr td{
+	padding: 5px;
+	font-size: 10pt;
+	max-width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.reporesultTable tr th{
+	font-weight: bold;
+	color: #444;
+	padding-left: 5px;
+}
+
+
+.reporesultTable tr:nth-child(even){
+	background-color: #eee;
+}
+
+.reporesultTable tr:hover{
+	background-color: #dedede;
+}
+
+.repo_markericonlist{
+	position: relative;
+	height: 116px;	
+}
+
+.repo_markericonlist li{
+	margin-top: 10px;
+	display: inline-block;
+}
+
+.browser.horizontal_selectlist{
+	position: relative;	
+	margin-top: 10px;
+	width: 98%;
+-webkit-box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 1);        
+        box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 1);
+}
+
+.browser .imageinput{
+	position: absolute;		
+	border: 4px solid #ddd;
+	top: 5px;
+	left: 5px;
+}
+
+.browser .repo_markericonlist{
+	margin-left: 96px;	
+}
+
+td{
+	font-family: arial;
+}

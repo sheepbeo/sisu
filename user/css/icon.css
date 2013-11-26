@@ -1,0 +1,155 @@
+.marker-icon{
+	position: relative;
+	-webkit-transition-duration: 0.2s;
+	text-align: center;	
+}
+
+
+span.marker_name_text{
+	font-family: arial, helvetica;
+	background-color: #252424;
+	box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+	padding: 8px;
+	padding-left: 12px;
+	padding-right: 12px;
+	white-space: nowrap;
+	color: #E6E6E6;
+	position: relative;
+	bottom: -26px;
+	font-size: 9pt;	
+	-webkit-transition-duration: 0.2s;
+}
+
+
+
+div.arrow-small-up{
+	content: "";
+	border-left:6px solid transparent;
+	border-right:6px solid transparent;
+	border-bottom:14px solid #000;
+	position: absolute;
+	top:105%;
+	left:50%;
+	margin-left: -6px;
+}
+
+div.arrow-small-left{
+	content: "";
+	border-bottom: 6px solid transparent;
+	border-top: 6px solid transparent;
+	border-right: 14px solid black;
+	position: absolute;
+	top: 32px;
+	left: -18px;
+	margin-top: -11px;
+}
+
+.hidden{
+	opacity: 0;
+	-webkit-transition-duration: 0.2s;
+}
+
+
+
+div.marker-textcontainer{
+	display: none;
+	opacity: 0;
+	position: absolute;
+	border-radius: 5px;
+	padding: 15px;
+	top: 0px;
+	left: 120%;
+	min-width: 300px;
+	max-width: 350px;
+	max-height: 400px;
+	box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+	z-index: 2000;
+	color: #ddd;
+	text-align: left;
+	-webkit-transition-duration:0.3s;
+}
+
+div.marker-textcontainer.visible-hide-text{
+	display: block;
+	opacity: 1;
+	-webkit-transition-duration:0.3s;
+}
+
+
+
+.marker-icon.gray-border .marker-textcontainer{
+	background-color: #252424;
+	border: 8px solid #EEE;	
+}
+
+.marker-icon.gray-border .marker_name_text{
+	background-color: #252424;
+	border: 1px solid #eee;
+	border-radius: 5px;
+}
+
+.marker-icon.gray-border .arrow-small-left{
+	left:-22px;	
+	border-right: 14px solid black;
+}
+
+
+
+
+
+
+
+
+
+
+.marker-icon.gray-noborder .marker-textcontainer{
+	background-color: #252424;
+	border: 1px solid transparent;	
+}
+
+.marker-icon.gray-noborder .marker_name_text{
+	background-color: #252424;
+	border: 1px solid transparent;
+}
+
+
+.marker-icon.gray-noborder .arrow-small-left{
+	left:-15px;
+}
+
+
+
+.marker-icon.white-border .marker-textcontainer{
+	background-color: #eee;
+	border: 4px solid #252424;	
+	color: #252424;
+}
+
+.marker-icon.white-border .marker_name_text{
+	background-color: #eee;
+	border: 2px solid #252424;
+	color: #252424;
+}
+
+.marker-icon.white-noborder .marker-textcontainer{
+	background-color: #eee;
+	border: 4px solid transparent;	
+	color: #252424;
+}
+
+.marker-icon.white-noborder .marker_name_text{
+	background-color: #eee;
+	border:1px solid transparent;
+	color: #252424;
+}
+
+
+.marker-icon.white-noborder .arrow-small-left{
+	left:-19px;	
+	border-right: 14px solid #aaa;
+}
+
+.marker-icon.white-noborder .arrow-small-up{	
+	border-bottom:14px solid #aaa;
+}
+

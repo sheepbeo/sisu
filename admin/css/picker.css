@@ -1,0 +1,77 @@
+.pickeritem{
+	height: 158px;
+	width: 128px;
+	display: inline-block;
+	overflow: hidden;
+	position: relative;
+	cursor: pointer;	
+	border: 4px solid #eee;
+	margin: 10px;
+	box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+	-webkit-transition-duration:0.2s;
+
+}
+
+.pickeritem:hover{
+	border: 4px solid #d00;
+	box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 1);
+	-webkit-transition-duration:0.2s;
+}
+
+.pickeritem img, .imglistitem img{
+	display: inline-block;
+	width: 128px;
+	height: 128px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+.pickeritem p, .imglistitem p{	
+	
+	position: relative;
+	width: 100%;	
+	top: 110px;
+	font-weight: normal;
+	color: #252424;
+	text-align: center;
+	background-color: #fff;
+	padding-top: 6px;
+	height: 22px;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	overflow:hidden;
+}
+.pickeritem p.picker-small{
+	padding-top: 3px;	
+	height: 14px;
+	font-weight: normal;
+	font-size: 10px;
+	position: relative;
+}
+
+ul.imagelist{
+	text-align: center;
+	overflow-y:scroll;
+}
+
+
+.imglistitem{
+	position: relative;
+	display: inline-block;	
+	border:4px solid transparent;
+	width: 128px;
+	height: 138px;
+	margin:10px;
+	box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+	-webkit-transition-duration:0.2s;
+}
+
+.imglistitem.selected, .pickeritem.selected{
+	border:4px solid #d00;
+}
+
+.imglistitem:hover{
+	border: 4px solid #400;
+	-webkit-transition-duration:0.2s;
+}

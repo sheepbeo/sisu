@@ -1,0 +1,48 @@
+
+.editorwindow_properties{
+	position: absolute;
+	right: 0px;
+	top: 10px;
+	height: 135px;
+	text-align: center;
+	width: 100%;
+	border-bottom: 2px dashed #999;
+}
+.editorwindow_properties input{
+	font-size: 14pt;
+}
+.editorwindow_properties select, .editorwindow_properties input, .editorwindow_properties textarea{
+	width: 60%;	
+	border: 1px solid #dedede;
+	display: block;
+	padding:5px;
+	margin-left: 20%;
+	margin-top: 10px;
+	text-align: center;
+}
+
+.editorwindow_inputcontainer{
+	position: relative;
+	top: 160px;
+	right: 0px;
+	width: 100%;
+	overflow-y:scroll;
+}
+
+.editorwindow{
+	position: absolute;
+}
+
+.editorwindow .header{
+	position: relative;
+	display: block;
+	min-height: 32px;
+}
+
+.editorwindow .container{
+	display: block;
+}
+
+.editorwindow.hidden .container{
+	display: none;
+}
