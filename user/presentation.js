@@ -356,9 +356,9 @@ presentation.prototype = {
 			this.error('no theme is set');
 		}
 		
-		if (this._style.showLogo()){
-			this.buildLogo();
-		}
+// 		if (this._style.showLogo()){
+// 			this.buildLogo();
+// 		}
 	
 		if(data.properties.menu){
 			var menustyle = this._style.getStyle('mainmenu').data.style;
