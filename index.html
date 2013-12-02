@@ -79,8 +79,11 @@
 					var e  = createPresentationItem(data[i]);		
 					list.append(e);
 					onTap(e);
+					currPresentationIndex = i;
 					e.click(function(){
-						startPresentation($(this).attr('id'));
+						//startPresentation($(this).attr('id')); 
+						//startPresentation($(this).attr('id')); 
+						window.location.href = 'index.html?'+escape($(this).find("h2").text());
 					});
 				}
 			}
