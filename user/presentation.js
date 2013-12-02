@@ -38,7 +38,7 @@ var presentation = function(id,opts){
 					inertiaThreshold:32
 				},
 	this._map = new map(this,this._mapOptions);	
-	resize.add(function(){me.scale()})
+	resize.add(function(){me.scale()});
 	this.load();
 	this.history = new history(this);
 
@@ -343,6 +343,13 @@ presentation.prototype = {
 	setItems : function(data){
 		var me = this;
 		this._map.setBaseLayer(data.properties.map);
+		
+		if(data.properties.overviewslide) {
+			this._overviewslide = data.properties.overviewslide;
+		} else 
+			alert("A presentation does not have a landing slide, but must have!");
+		
+		
 		if (data.properties.theme){
 			this._style = new style(data.properties.theme);
 		} else {
@@ -503,7 +510,10 @@ presentation.prototype = {
 			this._mainmenu.setButtonStyle(this._style.getStyle('buttons'));
 			this._mainmenu.setActions(this);
 			this._mainmenu.show();
-		}		
+		}
+		
+		//go to langing slide - first slide
+		this.action("showonly", {_id: this._overviewslide, type: "itemcollection"}, {properties:{}});		
 	},
 
 

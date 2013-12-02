@@ -113,7 +113,7 @@
 		clearView();
 		$("#wrapper").hide();
 		$("#launchPage").show();
-		$("#launchButton").click(function(){console.log("Here we are!"); launchPresentationMainScreen(id)});
+		$("#launchButton").click( function(){ launchPresentationMainScreen(id) } );
 
 		getData(id, function(data) {
 			$("#launchPageHeader").text(getText(data.properties.name));
