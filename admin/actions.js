@@ -78,7 +78,9 @@ var select = {
 	},
 	
 	overviewslide: function() {
-		var e = new overviewslideselect();
+		var e = new overviewslideselect(function(data) {
+			actions.selectOverviewSlide(data);
+		});
 		e.show();
 	}
 	
@@ -352,6 +354,12 @@ var actions = {
 
 			map.setbaselayer(name);
 		},
+		
+		selectOverviewSlide: function(data) {
+			$('#overviewslidename').text(data.name);
+			$('#overviewslide').attr('data-result',data._id);
+		},
+		
 		loadItem:function(id){
 			if (id instanceof Array){
 				for (var i in id){
@@ -400,9 +408,11 @@ var actions = {
 						if (data.properties.theme){
 							me.setTheme(data.properties.theme);
 						}
+						
 						if (data.properties.menu){
 							me.setMenu(data.properties.menu);
 						}
+						
 						if (data.properties.map){
 							me.selectbasemap(data.properties.map);
 						}

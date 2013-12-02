@@ -87,6 +87,13 @@
 	
 	text-align: center;
 }
+
+.centered.dropinput {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .dropinput{
 	margin-top: 20px;
 	display: inline-block;	
