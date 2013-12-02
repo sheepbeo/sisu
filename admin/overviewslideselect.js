@@ -7,7 +7,7 @@ function overviewslideselect(callback){
 	this.setPosition('center');
 	this.setHeader('overviewslide','select');
 	
-	this._targetinput = new targetDropInput();
+	this._targetinput = new targetDropInput('.itemlistitem[data-result*="itemcollection"]'); //
 	$(this._targetinput.getElement()).addClass("centered");
 
 	this.append($('<h3 class="inputset_header">Drag&amp;Drop the overview slide</h3>'));
@@ -22,5 +22,5 @@ overviewslideselect.prototype = new editorwindow();
 overviewslideselect.prototype.save = function() {
 	console.log("Saved");
 	this.remove();
-	this.callback(this._targetinput.getData());
+	this.callback(this._targetinput.getData()._id);
 }
