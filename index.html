@@ -127,7 +127,8 @@
 
 	function launchPresentationMainScreen(id){
 		if (typeof(id) == 'string'){
-			var p = new presentation(id);	
+			$("#wrapper").show();
+			var p = new presentation(id);
 			if (p) {
 				clearView();
 				$("#wrapper").show();

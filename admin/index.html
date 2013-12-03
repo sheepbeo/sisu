@@ -65,7 +65,7 @@
 
 	var langs = ['fin','en','swe'];
 
-	var NAME_ELLIPSIS_LENGTH = 20;
+	var NAME_ELLIPSIS_LENGTH = 30;
 	//var layers = Array();
 	//var editor = false;
 	//var layerList = new list();
@@ -242,30 +242,31 @@
 		</div>
 
 	</div>
+	<div id="toolbar-wrapper" style="text-align:center;">
+		<div id="toolbar">
 
-	<div id="toolbar">
+			<ul id="tools" class="tools">
+				<li class="tooltip" data-action="picker:presentation" data-callback="loadProject"><img src="img/download.png"></img><span>Load project</span></li>
+				<li class="tooltip" data-action="picker:itemcollection,page" data-opts="multi:true" data-callback="loadItem"><img src="img/database-download.png"></img><span>import from repository</span></li>		
+				<li class="tooltip" data-action="createItem:pages"><img src="img/book.png"></img><span>create pages</span></li>			
+				<!-- <li class="tooltip" data-action="imgupload:images"><img src="img/MD-photo.png"></img><span>upload images</span></li> -->			
+				<li class="tooltip" data-action="addLayer:layer"><img src="img/box.png"></img><span>create collections</span></li>					
+				<li class="tooltip" data-action="saveProject:layer"><img src="img/save.png"></img><span>Save project</span></li>		
+			</ul>
 
-		<ul id="tools" class="tools">
-			<li class="tooltip" data-action="picker:presentation" data-callback="loadProject"><img src="img/download.png"></img><span>Load project</span></li>
-			<li class="tooltip" data-action="picker:itemcollection,page" data-opts="multi:true" data-callback="loadItem"><img src="img/database-download.png"></img><span>import from repository</span></li>		
-			<li class="tooltip" data-action="createItem:pages"><img src="img/book.png"></img><span>create pages</span></li>			
-			<!-- <li class="tooltip" data-action="imgupload:images"><img src="img/MD-photo.png"></img><span>upload images</span></li> -->			
-			<li class="tooltip" data-action="addLayer:layer"><img src="img/box.png"></img><span>create collections</span></li>					
-			<li class="tooltip" data-action="saveProject:layer"><img src="img/save.png"></img><span>Save project</span></li>		
-		</ul>
+			<ul id="layertools" class="tools">
+				<!-- showtoolbar:tools -->
+				<!-- <li data-action=""><img src="img/arrow-1-left.png"></img><span>go back</span></li>			-->
+				<li class="tooltip toggle-action" data-action-type="toggle" data-action="editoradd:marker"><img src="img/map-marker-pin.png"></img><span>marker pins</span></li>			
+				<li class="tooltip" data-action="editoradd:overlay" ><img src="img/MD-photo.png"></img><span>overlay image</span></li>
+				<li class="tooltip" data-action="editoradd:tilelayer"  disabled="true"><img src="img/map.png"></img><span>map tile layer</span></li>		
+				<!-- <li class="tooltip" data-action="editoradd:polyline"   disabled="true"><img src="img/node.png"></img><span>polyline</span></li>-->
+				<li class="tooltip" data-action="importItems:marker"><img src="img/database-download.png"></img><span>import</span></li>		
+				<li class="tooltip" data-action="editorToggleBounds:bounds"><img src="img/full-screen-alt-3.png"></img><span>set bounds</span></li>		
+				
+			</ul>
 
-		<ul id="layertools" class="tools">
-			<!-- showtoolbar:tools -->
-			<!-- <li data-action=""><img src="img/arrow-1-left.png"></img><span>go back</span></li>			-->
-			<li class="tooltip toggle-action" data-action-type="toggle" data-action="editoradd:marker"><img src="img/map-marker-pin.png"></img><span>marker pins</span></li>			
-			<li class="tooltip" data-action="editoradd:overlay" ><img src="img/MD-photo.png"></img><span>overlay image</span></li>
-			<li class="tooltip" data-action="editoradd:tilelayer"  disabled="true"><img src="img/map.png"></img><span>map tile layer</span></li>		
-			<!-- <li class="tooltip" data-action="editoradd:polyline"   disabled="true"><img src="img/node.png"></img><span>polyline</span></li>-->
-			<li class="tooltip" data-action="importItems:marker"><img src="img/database-download.png"></img><span>import</span></li>		
-			<li class="tooltip" data-action="editorToggleBounds:bounds"><img src="img/full-screen-alt-3.png"></img><span>set bounds</span></li>		
-			
-		</ul>
-
+		</div>
 	</div>
 </div>
 

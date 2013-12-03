@@ -261,10 +261,60 @@ map.prototype.zoomIntoLayer = function(id){
 map.prototype.zoomInto = function(bounds){
 	if (bounds!= undefined && bounds != false){
 		var zoom = this._map.getBoundsZoom(bounds,true);
+
 		this._map.setView(bounds.getCenter(), zoom );//, this._map.getBoundsZoom(bounds,true));
+		//this.jumpFromTo(this._map.getCenter(), bounds.getCenter(), zoom);
+		//console.log(this._map);
+
 		this.fire('fitbounds',bounds);
 	}
 }
+
+map.prototype.zoomIntoZoomPanZoom = function(bounds){
+	if (bounds!= undefined && bounds != false){
+		var zoom = this._map.getBoundsZoom(bounds,true);
+
+		//this._map.setView(bounds.getCenter(), zoom );//, this._map.getBoundsZoom(bounds,true));
+		this.jumpFromTo(this._map.getCenter(), bounds.getCenter(), zoom);
+		//console.log(this._map);
+
+		this.fire('fitbounds',bounds);
+	}
+}
+
+map.prototype.zoomIntoPan = function(bounds){
+	if (bounds!= undefined && bounds != false){
+		var zoom = this._map.getBoundsZoom(bounds,true);
+
+		var options = {
+			animate: true,
+			duration: 1,
+			easeLinearity: 0.5
+		};
+
+		this._map.panTo(bounds.getCenter(), options);
+
+		this.fire('fitbounds',bounds);
+	}
+}
+
+// make a "jump" from one coordinate to another. Does not include interpolation (smooth transition) .. "yet" ?!
+map.prototype.jumpFromTo = function(origLL, destLL, finalZoom) {
+	var options = {
+		animate: true,
+		duration: 1,
+		easeLinearity: 0.5
+	};
+	var me = this;
+	var zoomMin = Math.min(me._map.getZoom(), finalZoom);
+
+	var waitTime = 0;
+	setTimeout(function() { me._map.setZoomAround(origLL, zoomMin - 1, options); }, waitTime);
+	waitTime += 1 * 1000;
+	setTimeout(function() { me._map.panTo(destLL, options); }, waitTime);
+	waitTime += options.duration * 1000 + 500;
+	setTimeout(function() { me._map.setZoomAround(destLL, finalZoom, options); }, waitTime);
+};
 
 // return all markers from layer
 map.prototype.getMarkers = function(layer){
@@ -319,8 +369,18 @@ map.prototype.addLayer =function(layer){
 			var id = this._map.addLayer(layer);
 			this._layers[layer._id] = layer;
 
+			//console.log(layer);
+
 			if (this._layers[layer._id].bounds != undefined){
-				this.zoomInto(this._layers[layer._id].bounds);
+				if (layer.properties.animatedtransition == undefined) {
+					this.zoomInto(this._layers[layer._id].bounds);
+				} else if (layer.properties.animatedtransition == 'zoom-pan-zoom') {
+					this.zoomIntoZoomPanZoom(this._layers[layer._id].bounds);
+				} else if (layer.properties.animatedtransition == 'instant') {
+					this.zoomInto(this._layers[layer._id].bounds);
+				} else if (layer.properties.animatedtransition == 'pan') {
+					this.zoomIntoPan(this._layers[layer._id].bounds);
+				}
 			}
 	
 			this.fire('layeradd',this.getLayerList());
@@ -439,7 +499,7 @@ map.prototype.showOnly = function(id,callback){
 	});
 }
 
-map.prototype.showAsView  =function(id,callback){
+map.prototype.showAsView = function(id,callback){
 	if (typeof(id) == 'object'){
 		id = id._id;		
 	}

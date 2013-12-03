@@ -196,6 +196,20 @@ presentation.prototype = {
 						this.showItem(target,caller);
 					}
 				break;
+
+				case 'showFromMarker':
+					me._map.clearLayers();
+					me.showItem(target,function(result){
+						if (result){
+							me._fire('addlayer',target);
+						} else {
+							me._fire('removelayer',target);
+						}
+						caller(result);
+					});
+
+				break;
+
 				case 'showonly':					
 					if (target.type == 'itemcollection'){						
 						me._map.showOnly(target._id,function(result){

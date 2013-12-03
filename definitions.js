@@ -1,11 +1,12 @@
 var presentation_actions = ['toggle','showasview','showonly',''];
+var itemcollection_transition_types = ['instant', 'zoom-pan-zoom', 'pan'];
 
-// var dbURL = 'http://touch.mobile.metropolia.fi/es/susi';
-// var baseURL = 'http://touch.mobile.metropolia.fi/es';
-// var repositoryURL = 'http://touch.mobile.metropolia.fi/es/datasets';
-var dbURL = 'http://localhost:9200/susi';
-var baseURL = 'http://localhost:9200';
-var repositoryURL = 'http://localhost:9200/datasets';
+var dbURL = 'http://touch.mobile.metropolia.fi/es/susi';
+var baseURL = 'http://touch.mobile.metropolia.fi/es';
+var repositoryURL = 'http://touch.mobile.metropolia.fi/es/datasets';
+// var dbURL = 'http://localhost:9200/susi';
+// var baseURL = 'http://localhost:9200';
+// var repositoryURL = 'http://localhost:9200/susi/marker/';
 
 var IMGURL = 'http://touch.mobile.metropolia.fi/image.php';
 var IMGFOLDER = 'http://touch.mobile.metropolia.fi/img/';

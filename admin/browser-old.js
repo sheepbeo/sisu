@@ -104,8 +104,7 @@ repoBrowser.prototype.createHeaders  =function(){
 	var cell = $('<th></th>');
 	row.append(cell);
 	//this._headers = ['sitename','city','x','y','description','timeperiod','type','subtype','excavated'];
-	//this._headers = ['type','lat','lng','sitename','city','x','y','description','timeperiod','type','subtype','excavated'];
-	this._headers = ['lat','lng','name','description','timestamp'];
+	this._headers = ['type','lat','lng','sitename','city','x','y','description','timeperiod','type','subtype','excavated'];
 
 	for (var i in this._headers){
 		var cell = $('<th>');
@@ -128,19 +127,30 @@ repoBrowser.prototype.getSelected = function(){
 }
 
 repoBrowser.prototype.createRow = function(data){
-	console.log(data);
-
 	var me = this;
 	
 	if (data._id != undefined){
 		var row = $('<tr>');
 		row.attr('id',data._id);
-		
-		row.append(this.createCell(data.coordinates.lat));
-		row.append(this.createCell(data.coordinates.lng));
-		row.append(this.createCellNotCut(data.properties.name));
-		row.append(this.createCell(data.properties.description));
-		row.append(this.createCell(data.timeStamp));
+
+		for (var i in data){	
+
+			if (typeof(data[i]) != 'object'){
+				var item = this.createCell(data[i]);				
+				//this._headers[i] = i;
+			} else {
+				var item = '';
+				for (var c in data[i]){
+					item += this.createCell(data[i][c]);
+					//this._headers[c] = c;
+				}
+			}
+			
+			if (item){
+				row.append(item);
+			}
+		}
+
 
 		row.prepend('<td><input type="checkbox" name="select"></input></td>');
 
@@ -182,27 +192,6 @@ repoBrowser.prototype.createCell = function(item){
 
 	if (item != ''){
 		return '<td>'+ellipsify(text)+'</td>';
-	} else {
-		return false;
-	}
-
-}
-
-repoBrowser.prototype.createCellNotCut = function(item){
-	var text ='';	
-	if (typeof(item) == 'object'){
-
-		for (var i in item){
-			if (typeof(item[i]) != 'object'){
-				text = item[i]
-			}
-		}		
-	} else {
-		text = item;
-	}
-
-	if (item != ''){
-		return '<td>'+text+'</td>';
 	} else {
 		return false;
 	}

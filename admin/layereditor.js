@@ -33,11 +33,18 @@ function layerEditor(){
 	this.pageidinput = $('<input class="pageid" type="text" placeholder="page-id"/>');
 
 	// making dropinputs for drag and drop page and next slide(itemcollection):
-	this.pageinputcontainer = $('<div class="dropinput-container" style="width:auto; position:absolute; bottom:100px; left:10px;"></div>');
+	this.pageinputcontainer = $('<div class="dropinput-container"></div>');
 	this._nextslideinput = new targetDropInput();
 	this._pageinput = new targetDropInput();
 	this.pageinputcontainer.append(this._nextslideinput.getElement());
 	this.pageinputcontainer.append(this._pageinput.getElement());
+
+	// selectbox (drop-down) for animated transition:
+	//this.animatedtransitioninput = $('<input class="animatedtransition-input" type="checkbox" checked="checked"/>');
+	this.animatedtransitioninput = $('<select name="transitiontype" class="animatedtransition-input"></select');
+	for (var i in itemcollection_transition_types){
+		this.animatedtransitioninput.append('<option value="'+itemcollection_transition_types[i]+'">'+itemcollection_transition_types[i]+'</option<');
+	}
 	
 	// this is not jquery append,btw
 	this.inputwindow.append( this.langSelector.getElement());
@@ -46,16 +53,17 @@ function layerEditor(){
 
 	this.inputwindow.append( this.nameinput );
 	this.inputwindow.append( this.descriptions);
-	this.inputwindow.append( this.currentid);
-	this.inputwindow.append( this.targetidinput);
-	this.inputwindow.append( this.pageidinput);
+	//this.inputwindow.append( this.currentid);
+	//this.inputwindow.append( this.targetidinput);
+	//this.inputwindow.append( this.pageidinput);
+	this.inputwindow.append( this.animatedtransitioninput);
 	this.inputwindow.append( this.buttons);
 
 	// append dropinputs:
 	//this.inputwindow.append(this._pageinput.getElement());
 	this.inputwindow.append(this.pageinputcontainer);
 	
-	this.inputwindow._container.css('height','400px');
+	this.inputwindow._container.css('height','300px');
 	this.inputwindow.addClass('layereditor');
 
 	this._descriptionText = {};
@@ -315,8 +323,10 @@ layerEditor.prototype = {
 			pageid:this._pageid,
 			pagelinked:this._pageinput.getData(),
 			nextSlide:this._nextslideinput.getData(),
+			animatedtransition:this.animatedtransitioninput.val(),
 			tags:[]
 		}
+
 		collection.type = 'itemcollection';
 
 		if (this._bounds){
@@ -371,6 +381,12 @@ layerEditor.prototype = {
 
 			this._pageinput.load(data.properties.pagelinked);
 			this._nextslideinput.load(data.properties.nextSlide);
+
+			if (data.properties.animatedtransition != undefined) {
+				//this.animatedtransitioninput[0].checked = data.properties.animatedtransition;
+				this.animatedtransitioninput.find('option[selected="selected"]').removeAttr('selected');
+				this.animatedtransitioninput.find('option[value="'+data.properties.animatedtransition +'"]').attr('selected','selected');
+			}
 
 			this.setLang(langs[0]);	
 		} else {

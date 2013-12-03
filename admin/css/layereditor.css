@@ -96,7 +96,7 @@
 	position: absolute;
 	bottom: 0px;
 	left: 250px;
-	width: 200px;	
+	width: 200px;
 }
 
 .layereditor .dropinput{
@@ -106,7 +106,21 @@
 	height: 96px;
 	border:4px solid #000;
 	margin: 15px;
-	margin-bottom: 25px;
+	margin-bottom: 15px;
 
 	position: relative;
+}
+
+.layereditor .dropinput-container {
+	width:auto;
+	position:absolute;
+	bottom:15px;
+	left:10px;
+}
+
+.layereditor .animatedtransition-input {
+	padding: 2px;
+	position: absolute;
+	bottom: 20px;
+	left: 300px;
 }

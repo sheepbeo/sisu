@@ -3,7 +3,7 @@ var presentation_actions = ['show','showasview','showonly'];
 var tileLayerOptions = {
 				updateWhenIdle:true,
 				tileSize:256
-			}
+			};
 
 var tileLayers = {
 	/*

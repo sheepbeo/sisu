@@ -151,6 +151,7 @@ var layerLoader = {
 
 				layer._id = data._id;
 				layer.properties = data.properties;
+				layer.type = 'itemcollection';
 
 				if (data.properties.bounds){
 					if (data.properties.bounds.enabled == true || data.properties.bounds.enabled == 'true'){
@@ -190,10 +191,10 @@ var layerLoader = {
 				}
 
 				// next button link to next slide
-				if (collection.properties.nextSlide != undefined && collection.properties.nextSlide._id != undefined) {
+				if (collection.properties.nextSlide != undefined && collection.properties.nextSlide._id != 'NONE') {
 					buttonNext.on("click", function() {
 
-						layerLoader.presentation._map.removeLayer(layer);
+						layerLoader.presentation._map.removeLayerById(layer._id);
 
 						var target = collection.properties.nextSlide;
 						layerLoader.presentation.showItem(target, function(result) {
@@ -205,6 +206,8 @@ var layerLoader = {
 							}
 						});
 					});
+				} else {
+					buttonNext.css('display', 'none');
 				}
 				
 				layerLoader.presentation.itemGroup = layer;
@@ -273,7 +276,7 @@ var layerLoader = {
 
 			marker._id = data._id;
 			marker.properties = data.properties;
-			marker.properties.action = 'showasview';
+			marker.properties.action = 'showFromMarker';
 			marker.properties.target = data.target;
 
 			if (data.target._id == undefined){
