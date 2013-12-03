@@ -492,7 +492,7 @@ presentation.prototype = {
 		});
 		this._map.on('addlayer',function(e){
 			me.menuSelectButton(e._id,true);
-			me.chkItemVisible();
+			//me.chkItemVisible();
 		});
 
 		this._map._map.on('zoomend',function(e){

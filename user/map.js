@@ -294,6 +294,7 @@ map.prototype.zoomIntoPan = function(bounds){
 
 		this._map.panTo(bounds.getCenter(), options);
 
+
 		this.fire('fitbounds',bounds);
 	}
 }
