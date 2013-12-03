@@ -258,17 +258,17 @@ page.prototype = {
 	setLang:function(lang){
 		chLang(this._element,lang);
 	},
-	addLangList:function(){
-		var me = this;
-		this._langList = getLangList(function(e){
-			me.setLang(e);
-		});
-		$('body').append(this._langList);
-	},
+// 	addLangList:function(){
+// 		var me = this;
+// 		this._langList = getLangList(function(e){
+// 			me.setLang(e);
+// 		});
+// 		$('body').append(this._langList);
+// 	},
 	show : function(){
 		this.applyOverlay();
 		$('body').append(this._element);
-		this.addLangList();
+// 		this.addLangList();
 
 		this._element.css({
 			opacity:0
