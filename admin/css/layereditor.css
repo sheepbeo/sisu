@@ -12,6 +12,7 @@
 
 
 .layereditor .container .layerinput {
+/*.layereditor .container input,.layereditor .container textarea{ */
 	margin-left: 10px;
 	margin-top: 10px;
 	display: inline-block;

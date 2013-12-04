@@ -1,6 +1,6 @@
-
-function targetDropInput(){
+function targetDropInput(accept){
 	var me = this;
+	this.accept = accept;
 	this.element = $('<div name="target" class="tooltip targetinput dropinput" title="link items for this point, they will be shown when this point is clicked" />');
 	this.tname = $('<span>drag & drop target into this</span>');
 	
@@ -18,7 +18,7 @@ function targetDropInput(){
 	});
 
 	this.element.droppable({
-		accept:'.itemlistitem',
+		accept: this.accept || '.itemlistitem',
 		hoverClass:'targetinput-hover',
 		drop:function(e,ui){
 				

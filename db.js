@@ -463,7 +463,7 @@ function saveItem(data,callback){
 
 
 function searchRepo(data,callback){
-		console.log(data);
+		//console.log(data);
 		$.ajax({
 			url:repositoryURL + '/_search',
 			type:'GET',

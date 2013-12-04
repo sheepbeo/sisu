@@ -87,7 +87,15 @@
 	
 	text-align: center;
 }
-.markereditor .dropinput{
+
+.centered.dropinput {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* //@TODO removed .markereditor, might cause problems */
+.dropinput{
 	margin-top: 20px;
 	display: inline-block;	
 	width: 96px;

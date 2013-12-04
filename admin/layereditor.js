@@ -64,6 +64,7 @@ function layerEditor(){
 	this.inputwindow.append(this.pageinputcontainer);
 	
 	this.inputwindow._container.css('height','300px');
+	
 	this.inputwindow.addClass('layereditor');
 
 	this._descriptionText = {};
@@ -357,8 +358,7 @@ layerEditor.prototype = {
 			//this.descriptions.val( setInputText(data.properties.description));
 			this._nameText = data.properties.name;
 			this._descriptionText = data.properties.description;
-			
-
+			//this.setLang(langs[0]);
 
 			this.imgInput.load(data.properties.image);
 			this.timeStamp = data.timeStamp;

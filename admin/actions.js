@@ -75,6 +75,13 @@ var select = {
 			$('#limiter_status').text('disabled');
 			$('#maplimiter').removeClass('green');
 		}
+	},
+	
+	overviewslide: function() {
+		var e = new overviewslideselect(function(id) {
+			actions.selectOverviewSlide(id);
+		});
+		e.show();
 	}
 }
 
@@ -346,6 +353,13 @@ var actions = {
 
 			map.setbaselayer(name);
 		},
+		selectOverviewSlide: function(id) {
+			getData(id, function(data) {
+				console.log(data);
+				$('#overviewslidename').text(data.properties.name.fin);
+			});
+			$('#overviewslide').attr('data-result',id);
+		},
 		loadItem:function(id){
 			if (id instanceof Array){
 				for (var i in id){
@@ -394,13 +408,20 @@ var actions = {
 						if (data.properties.theme){
 							me.setTheme(data.properties.theme);
 						}
+						
 						if (data.properties.menu){
 							me.setMenu(data.properties.menu);
 						}
+
 						if (data.properties.map){
 							me.selectbasemap(data.properties.map);
 						}
 
+						if(data.properties.overviewslide) {
+							me.selectOverviewSlide(data.properties.overviewslide);
+						} else
+							alert("Overview slide was not selected, but must have been!");
+						
 						if (data.public == true ||data.public == 'true'){
 							me.publish();
 						}
@@ -457,6 +478,7 @@ var actions = {
 					name:$('#title').text(),
 					description:$('#description').text(),
 					map:$('#basemap').attr('data-result') || {},
+					overviewslide: $('#overviewslide').attr('data-result'),
 					image:this.titleImage.getImage() || {},
 					//theme:actions.getTheme()._id,//actions.getTheme(),
 					theme:actions.getTheme(),

@@ -361,6 +361,12 @@ presentation.prototype = {
 		if (true) { //!TODO change this to data.properties.hasMinimap
 			this.buildMinimap(data.properties.map);
 		}
+		
+		if(data.properties.overviewslide) {
+			this._overviewslide = data.properties.overviewslide;
+		} else 
+			alert("A presentation does not have a landing slide, but must have!");
+
 
 		if (data.properties.theme){
 			this._style = new style(data.properties.theme);
@@ -368,9 +374,9 @@ presentation.prototype = {
 			this.error('no theme is set');
 		}
 		
-		if (this._style.showLogo()){
-			this.buildLogo();
-		}
+// 		if (this._style.showLogo()){
+// 			this.buildLogo();
+// 		}
 	
 		if(data.properties.menu){
 			var menustyle = this._style.getStyle('mainmenu').data.style;
@@ -537,7 +543,10 @@ presentation.prototype = {
 			this._mainmenu.setButtonStyle(this._style.getStyle('buttons'));
 			this._mainmenu.setActions(this);
 			this._mainmenu.show();
-		}		
+		}
+		
+		//go to langing slide - first slide
+		this.action("showonly", {_id: this._overviewslide, type: "itemcollection"}, {properties:{}});		
 	},
 
 

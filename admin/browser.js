@@ -62,6 +62,14 @@ repoBrowser.prototype.search = function(str){
 	var data = {
 		'q':str + extra //,
 		//'size':this.getLimit()
+
+// 	if (this.opts.getItemsByType){
+// 		extra =  ' AND type:'+this.opts.getItemsByType;
+// 	}
+
+// 	var data = {
+// 		'q':str + extra,
+// 		'size':this.getLimit()
 	}
 
 	searchRepo(data,function(e){		
@@ -106,6 +114,7 @@ repoBrowser.prototype.createHeaders  =function(){
 	//this._headers = ['sitename','city','x','y','description','timeperiod','type','subtype','excavated'];
 	//this._headers = ['type','lat','lng','sitename','city','x','y','description','timeperiod','type','subtype','excavated'];
 	this._headers = ['lat','lng','name','description','timestamp'];
+	//this._headers = ['type','lat','lng','sitename','city','x','y','description','timeperiod','type','subtype','excavated'];
 
 	for (var i in this._headers){
 		var cell = $('<th>');
@@ -129,7 +138,6 @@ repoBrowser.prototype.getSelected = function(){
 
 repoBrowser.prototype.createRow = function(data){
 	console.log(data);
-
 	var me = this;
 	
 	if (data._id != undefined){
@@ -209,7 +217,6 @@ repoBrowser.prototype.createCellNotCut = function(item){
 
 }
 
-
 repoBrowser.prototype.import = function(){
 	var items = this.getSelected();
 	var yes = true;
@@ -241,7 +248,6 @@ repoBrowser.prototype.getLimit = function(){
 
 
 repoBrowser.prototype.getSearchString = function(){
-	
 	var size = 100;
 	if (this.getLimit()){
 		size = this.getLimit();

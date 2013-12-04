@@ -15,28 +15,28 @@ function getLang(){
 	LANG= $('.langselect').attr('lang');
 	return LANG;
 }
-function getLangList(callback){
-	var e = $('<div class="langselect" />');
+// function getLangList(callback){
+// 	var e = $('<div class="langselect" />');
 	
-	for (var i in langs){
-		e.append( $('<img class="flag" lang="'+langs[i]+'" src="'+flags[langs[i]]+'" />' ) );
-		//e.append( $('<p class="lang">'+langs[i]+'</p>' ) );
-	}
+// 	for (var i in langs){
+// 		e.append( $('<img class="flag" lang="'+langs[i]+'" src="'+flags[langs[i]]+'" />' ) );
+// 		//e.append( $('<p class="lang">'+langs[i]+'</p>' ) );
+// 	}
 
-	e.find('.flag:first-child').addClass('selected');
-	onTap(e);
+// 	e.find('.flag:first-child').addClass('selected');
+// 	onTap(e);
 
-	e.find('.flag').click(function(){
-		e.find('.selected').removeClass('selected');
-		$(this).addClass('selected');
-		e.attr('lang',$(this).text());
+// 	e.find('.flag').click(function(){
+// 		e.find('.selected').removeClass('selected');
+// 		$(this).addClass('selected');
+// 		e.attr('lang',$(this).text());
 
-		if (typeof(callback)=='function'){
-			callback($(this).attr('lang'));
-		}
-	});
-	return e;
-}
+// 		if (typeof(callback)=='function'){
+// 			callback($(this).attr('lang'));
+// 		}
+// 	});
+// 	return e;
+// }
 
 function onTouch(e,callback){
 	if (e instanceof jQuery){
