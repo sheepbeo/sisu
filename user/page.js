@@ -165,19 +165,8 @@ var pagebuilder = {
 			if (item instanceof Array){
 
 				for (var c in item){
-					if (item[c] != false){
+					if (item[c] !== false){
 						pagecontainer.append(item[c]);
-						item[c].addClass('user-draggable drag-rotate drag-scale gallery-image random-position');
-						item[c].find('img').css({
-							'max-width':window.innerWidth*0.5,
-							'max-height':window.innerHeight*0.5
-						});
-
-						item[c].css({
-							position:'absolute',
-							top:'10%',
-							left:'10%'
-						})
 					}
 				}
 
@@ -198,7 +187,7 @@ var pagebuilder = {
 			var c = [];			
 			
 			for (var i in item.img){
-				var a = $('<div class="imagecontainer" />');
+				var a = $('<div class="imagecontainer-page-content" />');
 				var imgs = getPageImages(item.img[i]);
 				a.append(imgs);
 				c.push(a);			

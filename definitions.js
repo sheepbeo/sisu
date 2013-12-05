@@ -3,7 +3,7 @@ var itemcollection_transition_types = ['instant', 'zoom-pan-zoom', 'pan'];
 
 var dbURL = 'http://touch.mobile.metropolia.fi/es/susi';
 var baseURL = 'http://touch.mobile.metropolia.fi/es';
-var repositoryURL = 'http://touch.mobile.metropolia.fi/es/datasets';
+var repositoryURL = 'http://touch.mobile.metropolia.fi/es/susi/marker/';
 // var dbURL = 'http://localhost:9200/susi';
 // var baseURL = 'http://localhost:9200';
 // var repositoryURL = 'http://localhost:9200/susi/marker/';
