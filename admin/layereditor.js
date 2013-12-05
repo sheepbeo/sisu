@@ -71,15 +71,46 @@ function layerEditor(){
 	this._nameText = {};
 
 	this.inputwindow.setToggle();
-
+	
 	var me = this;
+	
+	//## Drawing init
+	this._drawnItems = new L.FeatureGroup();
+	map.map.addLayer(this._drawnItems); //TODO check that we remove them on new item collection
+	
+	this._drawControl = new L.Control.Draw({
+		position: 'bottomleft',
+		edit: {
+			featureGroup: this._drawnItems
+		},
+		draw: {
+			circle: false
+		}
+	});
+	
+	map.map.off('draw:created'); //clear other's slides events
+	map.map.on('draw:created', function (e) {
+		var type = e.layerType,
+			layer = e.layer;
+	
+		if (type === 'marker') {
+			// Do marker specific actions
+		}
+	
+		// Do whatever else you need to. (save to db, add to map etc)
+		me._drawnItems.addLayer(layer);
+	});
+	
+	//##
+
+
 
 	
 	this.langSelector.change(function(e){		
 		me.setLang(e);
 	});
 
-	this.on('remove',function(){
+	this.on('remove',function(){	
 		actions.showtoolbar('tools');
 	});
 
@@ -213,13 +244,15 @@ layerEditor.prototype = {
 	show:function(){
 		this._layer.show();
 		
+		map.map.addControl(this._drawControl);
+		
 		if (this._bounds != undefined){			
 			map.map.fitBounds(this._bounds._bounds);
 		}
 
 		this._fire('show',this);
 	},
-	hide:function(){
+	hide:function(){	
 		this.editmode = false;
 		this.setEdit();
 		this._layer.hide();
@@ -269,6 +302,8 @@ layerEditor.prototype = {
 		});
 	},
 	close:function(){
+		map.map.removeControl(this._drawControl);
+				
 		this.inputwindow.hide();
 		map.removeLayer(this._layer);
 		this._fire('close');

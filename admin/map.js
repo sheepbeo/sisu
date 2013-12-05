@@ -39,7 +39,7 @@ var map = {
 
 			set : function(div){
 				var me = this;
-				this.map = new L.Map(div,{maxZoom:18,minZoom:1,zoomControl:false,}),
+				this.map = new L.Map(div,{maxZoom:18,minZoom:1,zoomControl:false}),
 				//	osm = new L.TileLayer('http://a.www.toolserver.org/tiles/osm/{z}/{x}/{y}.png'),
 				//	ms = new L.BingLayer("AknWxnuhEculwqZVnAOZ8IINcG08774F5tmeyEnHbEzIwYwvXH2LUJg0JWBIX-uv",{type:'road'});
 						
