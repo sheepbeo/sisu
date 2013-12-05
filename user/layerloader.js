@@ -279,8 +279,16 @@ var layerLoader = {
 			html += textcontainer;
 
 			if (getText(data.properties.name) != ''){
-				html += '<div class="hide-on-zoom arrow-small-up"></div>';				
-				html += '<span class="hide-on-zoom marker_name_text">'+getText(data.properties.name)+'</span>';
+				if (icon.textcss != undefined) {
+					var textcss ='';
+					for (var i in icon.textcss){
+						textcss += i +':'+icon.textcss[i] +';';
+					} 
+					html+= '<div style="' + textcss + '">' +getText(data.properties.name)+ '</div>';
+				} else {
+					html += '<div class="hide-on-zoom arrow-small-up"></div>';				
+					html += '<span class="hide-on-zoom marker_name_text">'+getText(data.properties.name)+'</span>';
+				}
 			}
 
 			var micon = new L.divIcon({

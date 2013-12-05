@@ -110,6 +110,31 @@ var markericons = [
 			'left':'11px'
 		}
 
+	}, 
+	{
+		name:'square white',
+		icon: {
+			url:'marker_square_white_128.png',
+			offset:[64,128],
+			size:[128,128]
+		},
+		_id:'markericon_square_white',
+		css:{
+			'width':'96px',
+			'height':'64px',
+			'border-radius':'0px',
+			'position':'absolute',
+			'top':'16px',
+			'left':'16px'
+		},
+		textcss:{
+			'width':'96px',
+			'height':'auto',
+			'border-radius':'0px',
+			'position':'absolute',
+			'top':'88px',
+			'left':'16px'
+		}
 	}
 
 
