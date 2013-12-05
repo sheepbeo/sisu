@@ -408,7 +408,7 @@ presentation.prototype = {
 		*/
 
 		var osm2 = mapData.map();
-		var miniMap = new L.Control.MiniMap(osm2, { toggleDisplay: true }).addTo(this._map._map);
+		var miniMap = new L.Control.MiniMap(osm2, { position:'bottomleft',toggleDisplay: true }).addTo(this._map._map);
 	},
 	
 	buildLogo:function(){

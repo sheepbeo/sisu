@@ -171,7 +171,7 @@ var layerLoader = {
 					}
 				}
 
-				var sidebar = $('<div id="sidebar-content" style="position:absolute; right:0px; top:0px; background:white; padding:10px;">Sidbar:</div>');
+				var sidebar = $('<div id="sidebar-content">Sidebar:</div>');
 				$('#sidebar-content').remove();
 				$('#wrapper').append(sidebar);
 				var buttonNext = $('<div id="buttonNext-sidebar">Next</div>');

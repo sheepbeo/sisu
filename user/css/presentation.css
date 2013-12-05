@@ -277,3 +277,24 @@ body{
 .topLeftButton:hover {
 	background: Grey;
 }
+
+#sidebar-content {
+	width:20%;
+	position:absolute;
+	right:0px;
+	top:10px;
+	background:white;
+	padding:10px;
+
+}
+
+#buttonNext-sidebar {
+	background: red;
+	color: white;
+	width: 40px;
+	text-align: center;
+	padding: 3px 3px;
+	margin-left:auto;
+	margin-right: auto;
+	margin-top:30px;
+}
