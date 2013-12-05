@@ -193,7 +193,7 @@ var presentationStyle = {
 	{							
 		name:'showmainmenu',
 		type:'boolean',
-		default:'true',
+		default:'false',
 		caption:'Show mainmenu',
 		tooltip:'show mainmenu, if attached to presentation'
 	},
