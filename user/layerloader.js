@@ -190,25 +190,41 @@ var layerLoader = {
 					});
 				}
 
+				var gotoSlide = function (slide) {
+					layerLoader.presentation._map.removeLayerById(layer._id);
+
+					var target = slide;
+					layerLoader.presentation.showItem(target, function(result) {
+
+						if (result) {
+							layerLoader.presentation._fire('addlayer', target);
+						} else {
+							layerLoader.presentation._fire('removelayer', target);
+						}
+					});
+				};
 				// next button link to next slide
 				if (collection.properties.nextSlide != undefined && collection.properties.nextSlide._id != 'NONE') {
-					buttonNext.on("click", function() {
-
-						layerLoader.presentation._map.removeLayerById(layer._id);
-
-						var target = collection.properties.nextSlide;
-						layerLoader.presentation.showItem(target, function(result) {
-
-							if (result) {
-								layerLoader.presentation._fire('addlayer', target);
-							} else {
-								layerLoader.presentation._fire('removelayer', target);
-							}
-						});
-					});
+ 					
+ 					buttonNext.on("click", function() {	
+						gotoSlide(collection.properties.nextSlide) });		
 				} else {
 					buttonNext.css('display', 'none');
 				}
+				
+				//################### updatePresentationControls();
+				if(layer._id != layerLoader.presentation._overviewslide) {
+					$('#homeButton').show();
+					$('#homeButton').unbind(); //we are reusing the same button, so remove all click handlers
+					$('#homeButton').click( function() {
+						getData(layerLoader.presentation._overviewslide, function(slide) {
+							gotoSlide(slide);
+						});
+					});
+				} else {
+					$('#homeButton').hide();
+				}
+				//##################
 				
 				layerLoader.presentation.itemGroup = layer;
 				callback(layer);
