@@ -1,5 +1,5 @@
 // idle time counted for refreshing the presentation
-var refresh_idle_time = 180; // in seconds
+var refresh_idle_time = 300; // in seconds
 
 function refresh() {
   window.location.reload(true);
@@ -16,16 +16,8 @@ function start() {
 jQuery(document).ready(function() {
   start();
 
-  jQuery('body').mouseenter(function() {
+  jQuery('body').click(function() {
     clearTimeout(timer);
-  }).mouseleave(function(e) {
-    var pageX = e.pageX || e.clientX,
-      pageY = e.pageY || e.clientY;
-
-    if (pageX <= 0 || pageY <= 0) {
-      start();
-    } else {
-      clearTimeout(timer);
-    }
+    start();
   });
 });
