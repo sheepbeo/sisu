@@ -1,5 +1,5 @@
 // idle time counted for refreshing the presentation
-var refresh_idle_time = 3; // in seconds
+var refresh_idle_time = 300; // in seconds
 
 function refresh() {
   window.location.reload(true);

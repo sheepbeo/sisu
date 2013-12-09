@@ -117,9 +117,7 @@ var map = function(presentation,opts){
 		this.maxbounds = opts.maxbounds;
 		this._map.setMaxBounds(opts.maxbounds);
 	}
-
-	
-}
+};
 
 
 map.prototype.setMaxBounds = function(bounds){
