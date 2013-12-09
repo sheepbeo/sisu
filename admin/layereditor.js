@@ -1,6 +1,8 @@
 function layerEditor(){
 	var me = this;
 
+	this._active = false;
+	
 	this.nextIndex = 0;
 	this._layer = new L.LayerGroup();
 	//map.addLayer(this._layer);	
@@ -88,24 +90,18 @@ function layerEditor(){
 		}
 	});
 	
-	map.map.off('draw:created'); //clear other's slides events
-	
-	this._f = function (e) {
-		var type = e.layerType,
-			layer = e.layer;
-	
-		if (type === 'marker') {
-			// Do marker specific actions
+	map.map.on('draw:created', function (e) {
+		if(me._active) { // is this page responsible for adding that item?
+			var type = e.layerType,
+				layer = e.layer;
+		
+			// Do whatever else you need to. (save to db, add to map etc)
+			me._drawnItems.addLayer(layer);
+			console.log(me);
 		}
-	
-		// Do whatever else you need to. (save to db, add to map etc)
-		this._drawnItems.addLayer(layer);
-	}
-	map.map.on('draw:created', this._f, this);
+	});
 	
 	//##
-
-
 
 	
 	this.langSelector.change(function(e){		
@@ -245,6 +241,7 @@ layerEditor.prototype = {
 	},
 	show:function(){
 		this._layer.show();
+		this._active = true;
 		
 		map.map.addControl(this._drawControl);
 		
@@ -254,7 +251,8 @@ layerEditor.prototype = {
 
 		this._fire('show',this);
 	},
-	hide:function(){	
+	hide:function(){
+		//this._active = false;
 		this.editmode = false;
 		this.setEdit();
 		this._layer.hide();
@@ -304,6 +302,7 @@ layerEditor.prototype = {
 		});
 	},
 	close:function(){
+		this._active = false;
 		map.map.removeControl(this._drawControl);
 				
 		this.inputwindow.hide();
@@ -477,6 +476,9 @@ layerEditor.prototype = {
 			break;
 			case 'imageoverlay':
 				result = new overlayEditor(this._layer);
+				
+			case 'geoJSON' :
+				this._drawnItems.addLayer(L.GeoJSON.geometryToLayer(item.geoJSON));
 			break;
 			
 			//TODO geoJson code here.
