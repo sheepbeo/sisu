@@ -367,6 +367,9 @@ presentation.prototype = {
 		} else 
 			alert("A presentation does not have a landing slide, but must have!");
 
+		if(data.properties.termsandconditions) {
+			this._termsandconditions = data.properties.termsandconditions;
+		}
 
 		if (data.properties.theme){
 			this._style = new style(data.properties.theme);
@@ -545,6 +548,13 @@ presentation.prototype = {
 			this._mainmenu.show();
 		}
 		
+		// attach the terms and conditions page to the link:
+		$('#TermNCondLink').click(function() {
+			if (me._termsandconditions != undefined) {
+				me.action("showonly", {_id: me._termsandconditions, type: "page"}, {properties:{}});
+			}
+		});
+
 		//go to langing slide - first slide
 		this.action("showonly", {_id: this._overviewslide, type: "itemcollection"}, {properties:{}});		
 	},

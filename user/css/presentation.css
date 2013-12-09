@@ -278,6 +278,17 @@ body{
 	background: Grey;
 }
 
+#TermNCondLink {
+	position:absolute;
+	left:200px;
+	bottom:10px;
+	color:blue;
+}
+
+#TermNCondLink:hover {
+	cursor:pointer;
+}
+
 #sidebar-content {
 	width:20%;
 	position:absolute;
