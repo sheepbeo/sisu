@@ -1,10 +1,13 @@
 function targetDropInput(accept){
 	var me = this;
 	this.accept = accept;
-	this.element = $('<div name="target" class="tooltip targetinput dropinput" title="link items for this point, they will be shown when this point is clicked" />');
+	this.element = $('<div class="targetdropInput-wrapper"></div>');
+	this.target_element = $('<div name="target" class="tooltip targetinput dropinput" title="link items for this point, they will be shown when this point is clicked" />');
 	this.tname = $('<span>drag & drop target into this</span>');
+	this.buttonRemove = $('<div style="position:absolute; right:-25px; bottom:-25px; width:30px; height:30px; overflow:hidden" ></div>');
+	this.buttonRemove.append($('<img class="delete circle button" style="width:30px; height:30px;" src="img/trash-empty.png">'));
 	
-	this.element.click(function(){
+	this.target_element.click(function(){
 		//alert('todo')
 		if (!me.target){
 			actions.showListWindow();
@@ -17,7 +20,7 @@ function targetDropInput(accept){
 		return false;
 	});
 
-	this.element.droppable({
+	this.target_element.droppable({
 		accept: this.accept || '.itemlistitem',
 		hoverClass:'targetinput-hover',
 		drop:function(e,ui){
@@ -36,10 +39,23 @@ function targetDropInput(accept){
 		}
 	});
 
+	this.buttonRemove.click(function() {
+		me.target = false;
+
+		me.target_element.removeClass('targeted');
+		me.target_element.css({
+			'background-image':'',
+			'opacity':'1'
+		});
+	});
+
+	
 
 	this.target = false;
 	this.update();
-	this.element.append(this.tname);
+	this.target_element.append(this.tname);
+	this.element.append(this.target_element);
+	this.element.append(this.buttonRemove);
 }
 
 targetDropInput.prototype = {
@@ -51,9 +67,9 @@ targetDropInput.prototype = {
 			if (item._id != 'NONE'){
 				this.target = item;
 				this.tname.text(item.name);
-				if (this.target){				
-					this.element.addClass('targeted');
-					this.element.css({
+				if (this.target){
+					this.target_element.addClass('targeted');
+					this.target_element.css({
 						'background-image':'url("'+item.image+'")',
 						'opacity':'1'
 					});
@@ -142,13 +158,6 @@ targetInput.prototype = {
 			}
 	}
 }
-
-
-
-
-
-
-
 
 function actionSelect(){
 	this._el = $('<select name="action"></select');

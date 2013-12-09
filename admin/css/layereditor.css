@@ -100,16 +100,24 @@
 	width: 200px;
 }
 
-.layereditor .dropinput{
-	margin-top: 20px;
+.layereditor .animatedtransition-input {
+	padding: 2px;
+	position: absolute;
+	bottom: 20px;
+	left: 300px;
+}
+
+.targetdropInput-wrapper {
 	display: inline-block;	
 	width: 96px;
 	height: 96px;
-	border:4px solid #000;
 	margin: 15px;
-	margin-bottom: 15px;
-
+	padding: 0px;
 	position: relative;
+}
+
+.button-remove {
+	
 }
 
 .layereditor .dropinput-container {
@@ -117,11 +125,4 @@
 	position:absolute;
 	bottom:15px;
 	left:10px;
-}
-
-.layereditor .animatedtransition-input {
-	padding: 2px;
-	position: absolute;
-	bottom: 20px;
-	left: 300px;
 }
