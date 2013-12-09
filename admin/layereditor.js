@@ -89,7 +89,8 @@ function layerEditor(){
 	});
 	
 	map.map.off('draw:created'); //clear other's slides events
-	map.map.on('draw:created', function (e) {
+	
+	this._f = function (e) {
 		var type = e.layerType,
 			layer = e.layer;
 	
@@ -98,8 +99,9 @@ function layerEditor(){
 		}
 	
 		// Do whatever else you need to. (save to db, add to map etc)
-		me._drawnItems.addLayer(layer);
-	});
+		this._drawnItems.addLayer(layer);
+	}
+	map.map.on('draw:created', this._f, this);
 	
 	//##
 
@@ -349,6 +351,7 @@ layerEditor.prototype = {
 		for (var i in this.editors){
 			items.push(this.editors[i].getData());
 		}
+		this._saveDrawnData(items);
 		
 		collection.items = items;
 		collection.properties = {			
@@ -381,6 +384,30 @@ layerEditor.prototype = {
 		}
 
 		return collection;
+	},
+	
+	//TODO make it an editor
+	//saves lines, polygones, drawn by user
+	_saveDrawnData: function(items) {
+		this._drawnItems.getLayers().forEach(function (layer) {
+			var props = {};
+			//props.tags = [];
+	
+	
+			var data = {
+				//coordinates:point,
+				geoJSON: layer.toGeoJSON(),
+				properties: props,
+				type:'geoJSON',
+				//icon:this._imageinput.getData(),
+			}		
+	
+			//data.properties.description = this._description;
+		
+			data = stamp(this,data);
+			
+			items.push(data);
+		});
 	},
 
 	load:function(data){
@@ -451,6 +478,8 @@ layerEditor.prototype = {
 			case 'imageoverlay':
 				result = new overlayEditor(this._layer);
 			break;
+			
+			//TODO geoJson code here.
 
 		}
 
