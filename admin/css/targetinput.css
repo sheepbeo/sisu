@@ -1,0 +1,27 @@
+.dropinput{
+	display: inline-block;	
+	width: 96px;
+	height: 96px;
+	border:4px solid #000;
+
+	position: relative;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+}
+
+.dropinput:hover{
+	border: 4px solid #d00;	
+}
+
+.targetinput-hover{
+	border: 4px solid #d00;
+}
+
+.dropinput .imageinput{
+	background-image:url('../img/MD-photo.png');	
+}
+
+.targetinput{
+	background-image:url('../img/target.png');
+}

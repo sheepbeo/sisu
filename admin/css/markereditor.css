@@ -82,55 +82,13 @@
 	margin-top: 10px;	
 }
 
-.markereditor .dropinput-container{
+.markereditor .dropinput-container {
 	width: 100%;
-	
 	text-align: center;
+	position:absolute;
+	bottom:100px;
+	left:10px;
 }
-
-.centered.dropinput {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-/* //@TODO removed .markereditor, might cause problems */
-.dropinput{
-	margin-top: 20px;
-	display: inline-block;	
-	width: 96px;
-	height: 96px;
-	border:4px solid #000;
-	margin: 15px;
-	margin-bottom: 25px;
-
-	position: relative;
-}
-
-.markereditor .dropinput:hover{
-	border: 4px solid #d00;	
-}
-
-.targetinput-hover{
-	border: 4px solid #d00;
-}
-
-
-.dropinput{	
-	position: relative;
-	background-repeat: no-repeat;
-	background-position: center;
-	cursor: pointer;
-}
-
-.dropinput.imageinput{
-	background-image:url('../img/MD-photo.png');	
-}
-
-.dropinput.targetinput{
-	background-image:url('../img/target.png');	
-}
-
 
 .markereditor .bottombar{
 	position: absolute;
