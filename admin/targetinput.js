@@ -15,7 +15,6 @@ function targetDropInput(accept){
 			if (me.target.type =='page'){
 				actions.pageedit(me.target._id);
 			}
-			
 		}
 		return false;
 	});

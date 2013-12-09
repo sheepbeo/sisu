@@ -82,8 +82,15 @@ var select = {
 			actions.selectOverviewSlide(id);
 		});
 		e.show();
+	},
+
+	termsandconditions: function() {
+		var e = new termsandconditionsselect(function(id) {
+			actions.selectTermsAndConditions(id);
+		});
+		e.show();
 	}
-}
+};
 
 var actions = {
 		items:Array(),
@@ -355,11 +362,18 @@ var actions = {
 		},
 		selectOverviewSlide: function(id) {
 			getData(id, function(data) {
-				console.log(data);
 				$('#overviewslidename').text(data.properties.name.fin);
 			});
 			$('#overviewslide').attr('data-result',id);
 		},
+
+		selectTermsAndConditions: function(id) {
+			getData(id, function(data) {
+				$('#termsandconditionsname').text(data.properties.name.fin);
+			});
+			$('#termsandconditions').attr('data-result',id);
+		},
+
 		loadItem:function(id){
 			if (id instanceof Array){
 				for (var i in id){
@@ -421,6 +435,10 @@ var actions = {
 							me.selectOverviewSlide(data.properties.overviewslide);
 						} else
 							alert("Overview slide was not selected, but must have been!");
+
+						if(data.properties.termsandconditions) {
+							me.selectTermsAndConditions(data.properties.termsandconditions);
+						}
 						
 						if (data.public == true ||data.public == 'true'){
 							me.publish();
@@ -479,6 +497,7 @@ var actions = {
 					description:$('#description').text(),
 					map:$('#basemap').attr('data-result') || {},
 					overviewslide: $('#overviewslide').attr('data-result'),
+					termsandconditions: $('#termsandconditions').attr('data-result'),
 					image:this.titleImage.getImage() || {},
 					//theme:actions.getTheme()._id,//actions.getTheme(),
 					theme:actions.getTheme(),
