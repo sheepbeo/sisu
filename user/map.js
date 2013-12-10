@@ -79,6 +79,7 @@ var map = function(presentation,opts){
 	this._markerGroups = Array();
 	this._listeners = {};	// event listeners
 	this._presentation = presentation; // the presentation in wich this obj is linked to
+	this._onTransition = false;
 
 	if (opts.center == undefined){
 		/*
@@ -117,8 +118,31 @@ var map = function(presentation,opts){
 		this.maxbounds = opts.maxbounds;
 		this._map.setMaxBounds(opts.maxbounds);
 	}
-};
 
+
+	// Back to current slide click handler
+	this._handlerMoveEnd = function (e) {
+		//alert(data);
+		console.log(e.data);
+		me.zoomInto(e.data);
+	};
+
+	// Back to current slide logic
+	this._map.on('moveend', function(e){
+		if (me.getLayerList().length !== 0 && !me._onTransition) {
+			var curLayer = me.getLayer(me.getLayerList()[0].id);
+
+			if ( me._map.getZoom()-1 == me._map.getBoundsZoom(curLayer.bounds)
+							&& curLayer.bounds.contains(me._map.getBounds())) {
+				$('#backToCurrentSlideButton').css('display','none');
+				$('#backToCurrentSlideButton').unbind('click', curLayer.bounds, me._handlerMoveEnd);
+			} else {
+				$('#backToCurrentSlideButton').css('display','');
+				$('#backToCurrentSlideButton').bind('click', curLayer.bounds, me._handlerMoveEnd);
+			}
+		}
+	});
+};
 
 map.prototype.setMaxBounds = function(bounds){
 	if (bounds != undefined){
@@ -275,6 +299,7 @@ map.prototype.zoomIntoZoomPanZoom = function(bounds){
 		var zoom = this._map.getBoundsZoom(bounds,true);
 
 		//this._map.setView(bounds.getCenter(), zoom );//, this._map.getBoundsZoom(bounds,true));
+		this._onTransition = true;
 		this.jumpFromTo(this._map.getCenter(), bounds.getCenter(), zoom);
 		//console.log(this._map);
 
@@ -283,6 +308,8 @@ map.prototype.zoomIntoZoomPanZoom = function(bounds){
 }
 
 map.prototype.zoomIntoPan = function(bounds){
+	var me = this;
+
 	if (bounds!= undefined && bounds != false){
 		var zoom = this._map.getBoundsZoom(bounds,true);
 
@@ -292,8 +319,10 @@ map.prototype.zoomIntoPan = function(bounds){
 			easeLinearity: 0.5
 		};
 
-		this._map.panTo(bounds.getCenter(), options);
+		me._onTransition = true;
 
+		this._map.panTo(bounds.getCenter(), options);
+		setTimeout(function() { me._onTransition = false; me._map.setZoomAround(bounds.getCenter(), zoom, options); }, 1*1000 + 100);
 
 		this.fire('fitbounds',bounds);
 	}
@@ -314,7 +343,7 @@ map.prototype.jumpFromTo = function(origLL, destLL, finalZoom) {
 	waitTime += 1 * 1000;
 	setTimeout(function() { me._map.panTo(destLL, options); }, waitTime);
 	waitTime += options.duration * 1000 + 500;
-	setTimeout(function() { me._map.setZoomAround(destLL, finalZoom, options); }, waitTime);
+	setTimeout(function() { me._onTransition = false; me._map.setZoomAround(destLL, finalZoom, options);  }, waitTime);
 };
 
 // return all markers from layer
