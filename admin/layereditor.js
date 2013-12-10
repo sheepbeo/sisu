@@ -1,6 +1,8 @@
 function layerEditor(){
 	var me = this;
 
+	this._active = false;
+	
 	this.nextIndex = 0;
 	this._layer = new L.LayerGroup();
 	//map.addLayer(this._layer);	
@@ -71,15 +73,42 @@ function layerEditor(){
 	this._nameText = {};
 
 	this.inputwindow.setToggle();
-
+	
 	var me = this;
+	
+	//## Drawing init
+	this._drawnItems = new L.FeatureGroup();
+	map.map.addLayer(this._drawnItems); //TODO check that we remove them on new item collection
+	
+	this._drawControl = new L.Control.Draw({
+		position: 'bottomleft',
+		edit: {
+			featureGroup: this._drawnItems
+		},
+		draw: {
+			circle: false
+		}
+	});
+	
+	map.map.on('draw:created', function (e) {
+		if(me._active) { // is this page responsible for adding that item?
+			var type = e.layerType,
+				layer = e.layer;
+		
+			// Do whatever else you need to. (save to db, add to map etc)
+			me._drawnItems.addLayer(layer);
+			console.log(me);
+		}
+	});
+	
+	//##
 
 	
 	this.langSelector.change(function(e){		
 		me.setLang(e);
 	});
 
-	this.on('remove',function(){
+	this.on('remove',function(){	
 		actions.showtoolbar('tools');
 	});
 
@@ -211,6 +240,9 @@ layerEditor.prototype = {
 	},
 	show:function(){
 		this._layer.show();
+		this._active = true;
+		
+		map.map.addControl(this._drawControl);
 		
 		if (this._bounds != undefined){			
 			map.map.fitBounds(this._bounds._bounds);
@@ -219,6 +251,7 @@ layerEditor.prototype = {
 		this._fire('show',this);
 	},
 	hide:function(){
+		//this._active = false;
 		this.editmode = false;
 		this.setEdit();
 		this._layer.hide();
@@ -268,6 +301,9 @@ layerEditor.prototype = {
 		});
 	},
 	close:function(){
+		this._active = false;
+		map.map.removeControl(this._drawControl);
+				
 		this.inputwindow.hide();
 		map.removeLayer(this._layer);
 		this._fire('close');
@@ -313,6 +349,7 @@ layerEditor.prototype = {
 		for (var i in this.editors){
 			items.push(this.editors[i].getData());
 		}
+		this._saveDrawnData(items);
 		
 		collection.items = items;
 		collection.properties = {			
@@ -345,6 +382,30 @@ layerEditor.prototype = {
 		}
 
 		return collection;
+	},
+	
+	//TODO make it an editor
+	//saves lines, polygones, drawn by user
+	_saveDrawnData: function(items) {
+		this._drawnItems.getLayers().forEach(function (layer) {
+			var props = {};
+			//props.tags = [];
+	
+	
+			var data = {
+				//coordinates:point,
+				geoJSON: layer.toGeoJSON(),
+				properties: props,
+				type:'geoJSON',
+				//icon:this._imageinput.getData(),
+			}		
+	
+			//data.properties.description = this._description;
+		
+			data = stamp(this,data);
+			
+			items.push(data);
+		});
 	},
 
 	load:function(data){
@@ -414,7 +475,12 @@ layerEditor.prototype = {
 			break;
 			case 'imageoverlay':
 				result = new overlayEditor(this._layer);
+				
+			case 'geoJSON' :
+				this._drawnItems.addLayer(L.GeoJSON.geometryToLayer(item.geoJSON));
 			break;
+			
+			//TODO geoJson code here.
 
 		}
 
