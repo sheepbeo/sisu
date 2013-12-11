@@ -14,6 +14,9 @@ var iconURL = 'http://touch.mobile.metropolia.fi/icons/';
 var PAGESTYLES = ['gallery','normal','page'];
 var markerIconsURL = 'markericons';
 
+// idle time counted for refreshing the presentation
+var refresh_idle_time = 300; // in seconds
+
 var markericons = [
 	{
 		name:'square white',

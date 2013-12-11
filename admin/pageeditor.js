@@ -89,9 +89,13 @@ pageEditor.prototype.getData = function(){
 		var items = [];
 		
 		this.sortItems();
+		console.log(this._id);
+		
 
 		for (var i in this.items){
 			items.push(this.items[i].getData());
+
+			console.log(this.items[i].getData());
 		}
 
 		var props = {
@@ -158,7 +162,7 @@ pageEditor.prototype.sortItems = function(){
 pageEditor.prototype.save = function(){
 	var data = this.getData();
 	var me =this;
-
+	console.log(data);
 
 	saveItem(data,function(result){		
 		if (result.ok == true){
@@ -177,7 +181,6 @@ pageEditor.prototype.save = function(){
 pageEditor.prototype.removeField = function(field){
 	for (var i in this.items){
 		if (this.items[i] == field){
-			console.log(this.items[i])
 			this.items[i]._element.remove();
 			delete this.items[i];
 			this._fire('removeitem',field);

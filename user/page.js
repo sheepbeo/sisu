@@ -156,8 +156,16 @@ var pagebuilder = {
 		var textwrapper  = $('<div id="plainContentTextWrapper" class="iscroll" />');
 		var textcontainer = $('<div class="textcontainer" />');
 
-		pagecontainer.append(textwrapper.append(textcontainer));
+		if (data.items){
+			if (data.items instanceof Array){
+				data.items.sort(function(a,b){
+					return a.index - b.index;
+				});
+			}
+		}
 
+		pagecontainer.append(textwrapper.append(textcontainer));
+		
 		for (var i in data.items){
 			
 			var item = this.makeItem(data.items[i]);
@@ -166,7 +174,7 @@ var pagebuilder = {
 
 				for (var c in item){
 					if (item[c] !== false){
-						pagecontainer.append(item[c]);
+						textcontainer.append(item[c]);
 					}
 				}
 
@@ -352,9 +360,6 @@ page.prototype = {
 					};
 
 			$(this).css(pos);
-
-			console.log(size);
-
 		});
 	},
 	setDraggable:function(){
