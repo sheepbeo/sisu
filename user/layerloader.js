@@ -249,6 +249,11 @@ var layerLoader = {
 			callback(layer);
 		},
 
+		geoJSON: function(data, callback) {
+			var layer = L.GeoJSON.geometryToLayer(data.geoJSON)
+			callback(layer);
+		},
+
 		marker:function(data,callback){
 			var point = new L.LatLng(data.coordinates.lat,data.coordinates.lng),
 				marker = new L.Marker(point);
