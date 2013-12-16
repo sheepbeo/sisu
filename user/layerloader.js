@@ -171,10 +171,10 @@ var layerLoader = {
 					}
 				}
 
-				var sidebar = $('<div id="sidebar-content">Sidebar:</div>');
+				var sidebar = $('<div id="sidebar-content"></div>');
 				$('#sidebar-content').remove();
 				$('#wrapper').append(sidebar);
-				var buttonNext = $('<div id="buttonNext-sidebar">Next</div>');
+				var buttonNext = $('<div id="buttonNext-sidebar">Seuraava <i class="fa fa-arrow-right"></i></div>');
 				
 				// get page view on slide bar
 				if (collection.properties.pagelinked != undefined && collection.properties.pagelinked._id != undefined) {
@@ -275,7 +275,7 @@ var layerLoader = {
 				divimg = '<img class="marker-icon-image" style="'+css+'" src="'+img+'"></img>';
 			} 
 			
-			var html = '<div style="position:relative;overflow:hidden;background-image:url('+markerIconsURL+'/'+icon.icon.url+'); width:'+icon.icon.size[0]+'px; height:'+icon.icon.size[1]+'px" class="marker-icon-imagecontainer">'+divimg+'</div>';
+			var html = '<div style="position:relative;overflow:hidden;background-repeat:no-repeat;background-size:cover;background-image:url('+markerIconsURL+'/'+icon.icon.url+'); width:'+icon.icon.size[0]+'px; height:'+icon.icon.size[1]+'px" class="marker-icon-imagecontainer">'+divimg+'</div>';
 			html += textcontainer;
 
 			if (getText(data.properties.name) != ''){

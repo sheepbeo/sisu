@@ -19,7 +19,9 @@ function pageEditor(){
 	this.addTool('img/check-alt.png','save','save and exit');
 	this.addTool('img/announce.png','createInput:h2','create header');
 	this.addTool('img/script.png','createInput:p','add paragraph');
-	this.addTool('img/MD-photo.png','createInput:img','add image');	
+	this.addTool('img/MD-photo.png','createInput:img','add image');
+	this.addTool('img/music.png','createInput:music','add music');
+	this.addTool('img/video.png','createInput:video','add video');
 	//this.addTool('img/save.png','save','save');
 	this.addTool('img/cancel.png','remove','cancel');
 
@@ -241,6 +243,12 @@ pageInput.prototype = {
 			}
 
 			this._field.attr('data',escape(JSON.stringify(e)));
+		} else if (this._tag == 'music') {
+			this.musicurl = data.musicurl;
+			console.log(data.musicurl);
+		} else if (this._tag == 'video') {
+			this.videourl = data.videocurl;
+			console.log(data.videourl);
 		}
 
 	},
@@ -251,19 +259,32 @@ pageInput.prototype = {
 	},
 	getData:function(){
 		this.getText();
-		if (this._tag != 'img'){
-			
+		if (this._tag == 'img'){
 			return {
-				tag:this._tag,			
+				tag:this._tag,
+				index:this._element.index(),
+				img:JSON.parse( unescape(this._field.attr('data')))
+			};
+		} else if (this._tag == 'music') {
+			return {
+				tag:this._tag,
+				index:this._element.index(),
+				text:this.text,
+				musicurl:this.text
+			};
+		} else if (this._tag == 'video') {
+			return {
+				tag:this._tag,
+				index:this._element.index(),
+				text:this.text,
+				videourl:this.text
+			};
+		} else {
+			return {
+				tag:this._tag,
 				index:this._element.index(),
 				text:this.text
-			}
-		} else {			
-			return {
-					tag:this._tag,
-					index:this._element.index(),
-					img:JSON.parse( unescape(this._field.attr('data')))
-				}
+			};
 		}
 	},
 	setText:function(lang){
@@ -299,16 +320,23 @@ pageInput.prototype = {
 			case 'h2':
 			case 'h3':
 			case 'h1':
-				var field = $('<input type="text" class="'+this._tag+'"/>');
+				field = $('<input type="text" class="'+this._tag+'"/>');
 			break;
 			case 'img':
-				var field = $('<div class="imagepickerfield multi-image '+this._tag+'"/>');
+				field = $('<div class="imagepickerfield multi-image '+this._tag+'"/>');
 			break;
 			//field = $('<div class="pageeditor_imginput" contentEditable="true" />');
 			//break;
+			case 'music':
+				field = $('<textarea class="'+this._tag+'"/>');
+			break;
+
+			case 'video':
+				field = $('<textarea class="'+this._tag+'"/>');
+			break;
 
 			case 'p':
-				var field = $('<textarea class="'+this._tag+'"/>');
+				field = $('<textarea class="'+this._tag+'"/>');
 			break;
 		}
 
@@ -334,6 +362,6 @@ pageInput.prototype = {
 	getElement:function(){
 		return this._element;
 	}
-}
+};
 
 

@@ -22,29 +22,32 @@ var markericons = [
 		name:'square white',
 		icon: {
 			url:'marker_square_white_128.png',
-			offset:[64,128],
-			size:[128,128]
+			offset:[85,200],
+			size:[200,200]
 		},
 		_id:'markericon_square_white',
 		css:{
-			'width':'96px',
-			'height':'64px',
+			'width':'160px',
+			'height':'120px',
 			'border-radius':'0px',
 			'position':'absolute',
-			'top':'16px',
-			'left':'16px'
+			'top':'20px',
+			'left':'20px'
 		},
 		textcss:{
-			'width':'96px',
-			'height':'auto',
 			'border-radius':'0px',
 			'position':'absolute',
-			'top':'88px',
-			'left':'16px'
+			'bottom':'30px',
+			'left':'0',
+			'right':'0',
+			'margin-left':'auto',
+			'margin-right':'auto',
+			'font-size': '15pt',
+			'text-align': 'center'
 		}
 	},
 	{
-		name:'Gray square',		
+		name:'Gray square',
 		icon:{
 			url:'marker_square_gray64.png',
 			offset:[32,64],
@@ -191,6 +194,15 @@ var tileLayers = {
 					}
 				},
 	*/
+				mapbox: {
+					name:'MapBox',
+					description:'Mapbox mapping service, commercial license',
+					image:'',
+					map:function(){
+						var layer = new L.TileLayer('https://{s}.tiles.mapbox.com/v3/kettula.ggkmnf24/{z}/{x}/{y}.png', tileLayerOptions);
+						return layer;
+					}
+				},
 				cloudmade:{
 					name:'Cloudmade',
 					description:'Cloudmade mapping services, commercial license',

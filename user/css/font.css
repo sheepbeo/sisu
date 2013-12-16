@@ -1,0 +1,58 @@
+@font-face
+{
+	font-family: sourceSanPro;
+	src: url('../fonts/SourceSansPro-Regular.ttf.woff');
+}
+
+@font-face
+{
+	font-family: sourceSanPro;
+	src: url('../fonts/SourceSansPro-Bold.ttf.woff');
+	font-weight: bold;
+}
+
+@font-face
+{
+	font-family: sourceSanPro;
+	src: url('../fonts/SourceSansPro-Light.ttf.woff');
+	font-weight: lighter;
+}
+
+@font-face
+{
+	font-family: sourceSanPro;
+	src: url('../fonts/SourceSansPro-Black.ttf.woff');
+	font-weight: bolder;
+}
+
+@font-face
+{
+	font-family: sourceSanPro;
+	src: url('../fonts/SourceSansPro-It.ttf.woff');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face
+{
+	font-family: sourceSanPro;
+	src: url('../fonts/SourceSansPro-BoldIt.ttf.woff');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face
+{
+	font-family: sourceSanPro;
+	src: url('../fonts/SourceSansPro-LightIt.ttf.woff');
+	font-weight: lighter;
+	font-style: italic;
+}
+
+@font-face
+{
+	font-family: sourceSanPro;
+	src: url('../fonts/SourceSansPro-BlackIt.ttf.woff');
+	font-weight: bolder;
+	font-style: italic;
+}
