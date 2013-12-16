@@ -404,6 +404,37 @@ var actions = {
 				}
 			}
 		},
+
+		loadCopiedItem: function(id){
+			if (id instanceof Array){
+				for (var i in id){
+					this.loadCopiedItem(id[i]);
+				}
+			} else {
+				var me = this;
+				if (typeof(id) == 'string') {
+
+					getItem(id,function(item){
+						delete item._id;
+						if( typeof(me.editors[item.type]) == 'function'){
+							var editor = me.editors[item.type]();
+							editor.load(item);
+							editor.edit();
+							editor.on('add',function(editor){
+								var item = editor.getListItem();
+								me.addItem(item);
+								actions.showwindow('layers');
+								delete me.editor;
+								me.editor = false;
+							});
+						} else {
+							return false;
+						}
+					});
+				}
+			}
+		},
+
 		loadProject:function(id){
 			var me = this;
 			if (id instanceof Array){

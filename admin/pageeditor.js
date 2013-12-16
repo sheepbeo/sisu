@@ -91,13 +91,9 @@ pageEditor.prototype.getData = function(){
 		var items = [];
 		
 		this.sortItems();
-		console.log(this._id);
-		
 
 		for (var i in this.items){
 			items.push(this.items[i].getData());
-
-			console.log(this.items[i].getData());
 		}
 
 		var props = {
@@ -245,10 +241,8 @@ pageInput.prototype = {
 			this._field.attr('data',escape(JSON.stringify(e)));
 		} else if (this._tag == 'music') {
 			this.musicurl = data.musicurl;
-			console.log(data.musicurl);
 		} else if (this._tag == 'video') {
 			this.videourl = data.videocurl;
-			console.log(data.videourl);
 		}
 
 	},
