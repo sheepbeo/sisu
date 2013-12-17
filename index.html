@@ -125,7 +125,7 @@
 		getData(id, function(data) {
 			$("#launchPageHeader").text(getText(data.properties.name));
 			$("#launchPageText").text(getText(data.properties.description));
-			$("#launchPageImage").attr("src", $(getImageElement(data.properties.image)).attr("src"));
+			$("#launchPageImage").attr("src", getImage(data.properties.image, [500]));
 		});
 	}
 
