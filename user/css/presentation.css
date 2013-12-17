@@ -285,22 +285,54 @@ body{
 
 /* ############## NAVIGATION BUTTONS ############# */
 
-.topLeftButton {
-	position:absolute;
-	left:40px; 
-	top:40px; 
-	padding:20px;
+.circleButtonBase {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    behavior: url(PIE.htc);
 	
-	background:white;
-	opacity: 0.95;
+	position:absolute;
 	
 	z-index: 1000;
+
+	
+	background: white;
+	color: #303030;
+	opacity: 0.95;
 }
 
-.topLeftButton:hover {
+.circleButtonBase:hover {
 	background: Grey;
 	color: white;
+	cursor: pointer;
 }
+
+.circleButtonBase i {
+	height: 80px;
+	width: 80px;
+	line-height: 80px; /*set it to width! */
+	
+	display: block;
+	font-size: 3.5em;
+
+
+	text-align: center;
+}
+
+.topLeftButton {
+	left:40px; 
+	top:40px; 
+}
+
+#backToCurrentSlideButton {
+	left: 40px;
+	top: 140px;
+}
+
+#backToCurrentSlideButton i {
+	font-size: 3em;
+}
+
 
 #TermNCondLink {
 	position:absolute;
@@ -313,21 +345,6 @@ body{
 
 #TermNCondLink:hover {
 	cursor:pointer;
-}
-
-#backToCurrentSlideButton {
-	position:absolute;
-	left:40px;
-	top:150px;
-	background:white;
-	opacity: 0.95;
-	padding: 20px;
-}
-
-#backToCurrentSlideButton:hover {
-	cursor:pointer;
-	background: gray;
-	color: white;
 }
 
 #buttonNext-sidebar {
@@ -359,14 +376,6 @@ body{
 #buttonNext-sidebar:hover {
 	background: #D50000;
 }
-
-.circleBase {
-    -webkit-border-radius: 999px;
-    -moz-border-radius: 999px;
-    border-radius: 999px;
-    behavior: url(PIE.htc);
-}
-
 /* ############## End NAVIGATION BUTTONS */
 
 #sidebar {
