@@ -86,7 +86,7 @@ function layerEditor(){
 			featureGroup: this._drawnItems
 		},
 		draw: {
-			circle: false
+			circle: false,
 		}
 	});
 	
@@ -491,7 +491,7 @@ layerEditor.prototype = {
 
 		return result;
 	},
-
+	
 	dropItem:function(e){
 		var me = this;
 		var point = map.map.mouseEventToLatLng(e);

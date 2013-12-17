@@ -250,7 +250,24 @@ var layerLoader = {
 		},
 
 		geoJSON: function(data, callback) {
-			var layer = L.GeoJSON.geometryToLayer(data.geoJSON)
+			var layer = L.GeoJSON.geometryToLayer(data.geoJSON);
+			
+			switch(data.geoJSON.geometry.type) {
+				case "LineString" :
+					layer.setStyle({
+						color : "#E64545",
+						weight : 4,
+						opacity : 0.9
+					});
+				case "Point" :
+					break;
+				case "Polygon" :
+					layer.setStyle({
+						color : "#E64545",
+						weight : 3
+					});
+			}
+			
 			callback(layer);
 		},
 
