@@ -132,11 +132,14 @@ var map = function(presentation,opts){
 		if (me.getLayerList().length !== 0 && !me._onTransition) {
 			var curLayer = me.getLayer(me.getLayerList()[0].id);
 
-			if ( me._map.getZoom()-1 == me._map.getBoundsZoom(curLayer.bounds)
-							&& curLayer.bounds.contains(me._map.getBounds())) {
+			// check if the map is in the current slide view ...
+			if ( me._map.getZoom()-1 == me._map.getBoundsZoom(curLayer.bounds) && curLayer.bounds.contains(me._map.getBounds())) {
+				// ... if yes, hide the back button, unbind the event handler
 				$('#backToCurrentSlideButton').css('display','none');
-				$('#backToCurrentSlideButton').unbind('click', curLayer.bounds, me._handlerMoveEnd);
+				$('#backToCurrentSlideButton').unbind('click', me._handlerMoveEnd);
 			} else {
+				// ... if no, show the back button, unbind and bind again the event handler
+				$('#backToCurrentSlideButton').unbind('click', me._handlerMoveEnd);
 				$('#backToCurrentSlideButton').css('display','');
 				$('#backToCurrentSlideButton').bind('click', curLayer.bounds, me._handlerMoveEnd);
 			}

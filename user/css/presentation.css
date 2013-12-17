@@ -22,7 +22,7 @@
 }
 
 h1,h2,h3,h4,h5,h6,p,span,a,div,td,th{
-	font-family: "arial", "helvetica neue";
+	font-family: sourceSanPro;
 }
 
 a{
@@ -41,51 +41,65 @@ h1{
 
 /*######### Launch page #############*/
 #launchPage {
-	margin: auto;
-    width: 100%;
-    height: 100%;
+	color: white;
+	background: #303030;
+	width: 1440px;
+	height: 900px;
 }
 
 .launchPageHeader {
-	text-align: center;
-	margin-bottom: 1em;
+	font-size: 60pt;
+	line-height: 72pt;
 }
 
-.launchPageContent {
-	margin-left: auto;
-    margin-right: auto;
+.leftPane60 {
+	margin: 80px;
+	float: left;
 	width: 50%;
 }
 
+.rightPane30 {
+	float: right;
+	width: 35%;
+}
+
 .launchPageText {
-	font-size: 20pt;
-	width: 70%;
+	font-size: 30pt;
+	line-height: 40pt;
+	margin-top: 1em;
 }
 
 .launchPageImage {
-	float: right;
-	width: 25%;
+	margin-top: 0px;
+	margin-right: -80px; 
+	margin-left: auto;
+	height: 900px;
+	width: 100%;
 }
 
 #launchButtonWrapper {
 	display:block;
 	position: fixed;
-	width: 100%;
 	margin-left: auto;
     margin-right: auto;
-    bottom: 1em;
+    width: 50%;
+    bottom: 85px;
+    text-align: center;
 }
 
 #launchButton {
-	display:block;
-
-	margin-left: auto;
-    margin-right: auto;
-
-    width: 7em;
-    height: 3em;
-
+	display:inline-block;
+	background: #D50000;
+    padding: 20px 50px;
+    text-align: center;
     font-size: 30pt;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+#launchButton:hover {
+	background: white;
+	color: #D50000;
 }
 
 /*#########################*/
@@ -199,8 +213,8 @@ body{
 	width: 128px;
 	height: 128px;	
 	border: 8px solid #ddd;
--webkit-box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 1);        
-        box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 1);	
+	-webkit-box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 1);        
+    box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 1);	
 }
 
 .presentation_container p, .presentation_container h2{
@@ -258,31 +272,32 @@ body{
 }
 
 
-/* NAVIGATION BUTTONS */
-
-
+/* ############## NAVIGATION BUTTONS ############# */
 
 .topLeftButton {
 	position:absolute;
-	left:30px; 
-	top:30px; 
-	padding:30px;
+	left:40px; 
+	top:40px; 
+	padding:20px;
 	
 	background:white;
-	opacity: 0.7;
+	opacity: 0.95;
 	
 	z-index: 1000;
 }
 
 .topLeftButton:hover {
 	background: Grey;
+	color: white;
 }
 
 #TermNCondLink {
 	position:absolute;
-	left:200px;
-	bottom:10px;
-	color:blue;
+	left:300px;
+	bottom:40px;
+	font-size: 15pt;
+	color:white;
+	border-bottom: 2px white dotted;
 }
 
 #TermNCondLink:hover {
@@ -291,11 +306,10 @@ body{
 
 #backToCurrentSlideButton {
 	position:absolute;
-	left:30px;
-	top:120px;
-	color:black;
-	background: white;
-	opacity: 0.7;
+	left:40px;
+	top:150px;
+	background:white;
+	opacity: 0.95;
 	padding: 20px;
 }
 
@@ -305,23 +319,72 @@ body{
 	color: white;
 }
 
+#buttonNext-sidebar {
+	background: #D50000;
+	color: white;
+	text-align: center;
+	padding: 0.6em;
+	font-size: 20pt;
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+	margin-right: auto;
+	margin-left: auto;
+	border-radius: 0.2em;
+	font-weight: bold;
+	border: 10px #D50000;
+}
+
+#buttonNext-sidebar:hover {
+	background: #D50000;
+}
+
+.circleBase {
+    -webkit-border-radius: 999px;
+    -moz-border-radius: 999px;
+    border-radius: 999px;
+    behavior: url(PIE.htc);
+}
+
+/* ############## End NAVIGATION BUTTONS */
+
 #sidebar-content {
-	width:20%;
+	width:384px;
 	position:absolute;
 	right:0px;
-	top:10px;
+	top:50px;
 	background:white;
-	padding:10px;
-
+	padding:20px;
+	height: 790px;
+	opacity: 0.95;
 }
 
-#buttonNext-sidebar {
-	background: red;
-	color: white;
-	width: 40px;
-	text-align: center;
-	padding: 3px 3px;
-	margin-left:auto;
-	margin-right: auto;
-	margin-top:30px;
+#sidebar-content p {
+	font-size: 20pt;
+	line-height: 26pt;
+	margin-bottom: 20pt;
 }
+
+#sidebar-content h2 {
+	font-size: 33pt;
+	line-height: 40pt;
+	font-weight: bold;
+}
+
+
+/* ########## Minimap style ############*/
+
+.leaflet-control-minimap {
+	left:30px;
+	bottom:30px;
+}
+
+/* ########## End minimap style */
+
+/* ########## remove attribution style ############*/
+
+.leaflet-control-attribution {
+	display: none;
+}
+
+/* ########## End remove attribution style */

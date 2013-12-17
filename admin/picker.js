@@ -53,14 +53,18 @@ picker.prototype.getList = function(type){
 			}
 		}
 	});
-}
+};
 
 picker.prototype.addItem = function(item){
-	var e = $('<li class="pickeritem" />');
+	var me = this;
+
+	var container = $('<li class="pickeritem" />');
+		var e = $('<div class="pickeritem-container"></div>');
 
 		if (item.properties.image){
 			var img = getImageElement(item.properties.image,[96,96]);
-		}	e.append(img);
+			e.append(img);
+		}
 
 		var name = item.properties.name;
 
@@ -81,7 +85,7 @@ picker.prototype.addItem = function(item){
 
 		var me = this;
 		e.click(function(){
-			if (me.opts.multi != true){
+			if (me.opts.multi !== true){
 				$(this).addClass('selected');
 				me.callback([$(this).attr('id')]);
 				me.remove();
@@ -89,9 +93,36 @@ picker.prototype.addItem = function(item){
 				$(this).toggleClass('selected');
 			}
 		});
-	
-	this.list.append(e);
-}
+
+		var buttonDelete = $('<div class="picker-button-delete picker-button"></div>');
+		var buttonConfirm = $('<div class="picker-button-confirm picker-button" style="display:none;"></div>');
+		var buttonCancel = $('<div class="picker-button-cancel picker-button" style="display:none"></div>');
+
+		buttonDelete.click(function(e) {
+			buttonDelete.css('display', 'none');
+			buttonConfirm.css('display', 'block');
+			buttonCancel.css('display', 'block');
+		});
+
+		buttonConfirm.click(function(e) {
+			container.css('display', 'none');
+			deleteData(item, function(result) {
+			});
+		});
+
+		buttonCancel.click(function(e) {
+			buttonDelete.css('display', 'block');
+			buttonConfirm.css('display', 'none');
+			buttonCancel.css('display', 'none');
+		});
+
+
+	container.append(e);
+	container.append(buttonDelete);
+	container.append(buttonConfirm);
+	container.append(buttonCancel);
+	this.list.append(container);
+};
 
 picker.prototype.export = function(){
 	var me = this;
@@ -107,16 +138,7 @@ picker.prototype.export = function(){
 	}
 
 	me.remove();
-}
-
-
-
-
-
-
-
-
-
+};
 
 
 function imgPicker(opts,callback){

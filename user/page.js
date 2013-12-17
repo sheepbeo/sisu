@@ -156,8 +156,16 @@ var pagebuilder = {
 		var textwrapper  = $('<div id="plainContentTextWrapper" class="iscroll" />');
 		var textcontainer = $('<div class="textcontainer" />');
 
-		pagecontainer.append(textwrapper.append(textcontainer));
+		if (data.items){
+			if (data.items instanceof Array){
+				data.items.sort(function(a,b){
+					return a.index - b.index;
+				});
+			}
+		}
 
+		pagecontainer.append(textwrapper.append(textcontainer));
+		
 		for (var i in data.items){
 			
 			var item = this.makeItem(data.items[i]);
@@ -166,7 +174,7 @@ var pagebuilder = {
 
 				for (var c in item){
 					if (item[c] !== false){
-						pagecontainer.append(item[c]);
+						textcontainer.append(item[c]);
 					}
 				}
 
@@ -184,28 +192,32 @@ var pagebuilder = {
 	makeItem:function(item){
 		
 		if (item.tag == 'img'){
-			var c = [];			
+			var c = [];
 			
 			for (var i in item.img){
 				var a = $('<div class="imagecontainer-page-content" />');
 				var imgs = getPageImages(item.img[i]);
 				a.append(imgs);
-				c.push(a);			
+				c.push(a);
 			}
 
 			return c;
+		} else if (item.tag == 'music'){
+			var m = $('<audio controls><source src="' + item.musicurl.fin + '" type="audio/mpeg"><source src="' + item.musicurl.fin + '" type="audio/ogg">Your browser does not support this audio format.</audio>');
+			return m;
+
+		} else if (item.tag == 'video'){
+			var v = $('<video controls><source src="' + item.videourl.fin + '" type="video/mp4"><source src="' + item.videourl.fin + '" type="video/ogg">Your browser does not support this audio format.</video>');
+			return v;
 
 		} else {
-			var tag =item.tag,
-				eitem = $('<'+tag+'>'+getText(item.text)+'</'+tag+'>');
-			
-			
-				setTextData(eitem,item.text);				
-			
+			var tag =item.tag;
+			var eitem = $('<'+tag+'>'+getText(item.text)+'</'+tag+'>');
+			setTextData(eitem,item.text);
+			return eitem;
 		}
-		return eitem;
 	}
-}
+};
 
 function chLang(element,lang){
 	element.find('.multilanguage-text').each(function(){
@@ -352,9 +364,6 @@ page.prototype = {
 					};
 
 			$(this).css(pos);
-
-			console.log(size);
-
 		});
 	},
 	setDraggable:function(){

@@ -178,7 +178,7 @@ markerEditor.prototype = {
 				iconSize:icon.icon.size,
 				iconAnchor:icon.icon.offset,
 				className:'marker-icon',
-				html:'<div style="position:relative;overflow:hidden;background-image:url(../'+markerIconsURL+'/'+icon.icon.url+'); width:'+icon.icon.size[0]+'px; height:'+icon.icon.size[1]+'px" class="marker-icon-imagecontainer"><img class="marker-icon-image" style="'+css+'" src="'+iconimage+'"></img></div>'
+				html:'<div style="position:relative;background-repeat:no-repeat;background-size:cover;overflow:hidden;background-image:url(../'+markerIconsURL+'/'+icon.icon.url+'); width:'+icon.icon.size[0]+'px; height:'+icon.icon.size[1]+'px" class="marker-icon-imagecontainer"><img class="marker-icon-image" style="'+css+'" src="'+iconimage+'"></img></div>'
 			});
 
 			this._marker.setIcon(micon);

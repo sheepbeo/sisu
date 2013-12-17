@@ -24,11 +24,16 @@
 }
 
 .leaflet-control-minimap-toggle-display {
-    background-image: url("images/toggle.png");
-    border-radius: 2px 0px 2px 0px;
-    height: 19px;
-    width: 19px;
+    background-image: url("images/toggle_3.png");
+    border-radius: 0px 0px 0px 0px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    height: 30px;
+    width: 30px;
     position: absolute;
     bottom: 0;
-    right: 0; 
+    left: 0;
 }
