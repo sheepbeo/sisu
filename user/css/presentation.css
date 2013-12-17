@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700);
 *{
 	-webkit-user-select:none;		
 }
@@ -105,7 +105,7 @@ h1{
     font-size: 44px;
     font-weight: bold;
     border-radius: 5px;
-	text-shadow: -1px -2px rgba(0,0,0,.5)
+	text-shadow: -1px -2px rgba(0,0,0,.5);
 }
 
 #launchButton:hover {
@@ -332,18 +332,28 @@ body{
 
 #buttonNext-sidebar {
 	background: #D50000;
+	text-shadow: -0.09em -0.09em rgba(0,0,0,.5);
+	
 	color: white;
 	text-align: center;
-	padding: 0.6em;
-	font-size: 20pt;
-	position: absolute;
-	bottom: 1em;
-	right: 1em;
-	margin-right: auto;
-	margin-left: auto;
+	padding: 0.7em 1.2em;
+	
+	font-size: 20px;
+/* 	position: absolute; */
+	float: right;
+/* 	bottom: 1em;
+	right: 1em; */
+	
+/* 	margin-right: auto;
+	margin-left: auto; */
+	margin-bottom: 30px;
+	
 	border-radius: 0.2em;
 	font-weight: bold;
-	border: 10px #D50000;
+}
+
+#buttonNext-sidebar .fa{
+	font-size: 16px;
 }
 
 #buttonNext-sidebar:hover {
@@ -359,27 +369,42 @@ body{
 
 /* ############## End NAVIGATION BUTTONS */
 
-#sidebar-content {
-	width:384px;
+#sidebar {
+	width: 385px;
 	position:absolute;
 	right:0px;
-	top:50px;
+	top: 40px;
 	background:white;
-	padding:20px;
-	height: 790px;
-	opacity: 0.95;
+/* 	height: 790px; */
+	max-height: 860px;
+	opacity: 0.95;	
+}
+
+#sidebar-content {
+	padding: 40px;
+	padding-top: 30px;
 }
 
 #sidebar-content p {
-	font-size: 20pt;
-	line-height: 26pt;
-	margin-bottom: 20pt;
+	font-size: 20px;
+	line-height: 26px;
+	
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
 
 #sidebar-content h2 {
-	font-size: 33pt;
-	line-height: 40pt;
+	font-size: 33px;
+	margin-bottom: 20px;
+	line-height: 40px;
 	font-weight: bold;
+	
+	padding-bottom: 7px;
+	border-bottom: solid 4px black;
+}
+
+.imagecontainer-page-content img{
+	width: 100%;
 }
 
 

@@ -171,8 +171,11 @@ var layerLoader = {
 					}
 				}
 
-				var sidebar = $('<div id="sidebar-content"></div>');
-				$('#sidebar-content').remove();
+				var sidebar = $('<div id="sidebar"></div>');
+				var sidebarContent = $('<div id="sidebar-content"></div>');
+				$('#sidebar').remove();
+				
+				sidebar.append(sidebarContent);
 				$('#wrapper').append(sidebar);
 				var buttonNext = $('<div id="buttonNext-sidebar">Seuraava <i class="fa fa-arrow-right"></i></div>');
 				
@@ -182,9 +185,9 @@ var layerLoader = {
 						if (page != undefined) {
 							var pagecontent = pagebuilder.plainContent(page);
 							//console.log(pagecontent);
-							sidebar.append(pagecontent.html());
+							sidebarContent.append(pagecontent.html());
 
-							sidebar.append(buttonNext);
+							sidebarContent.append(buttonNext);
 						}
 
 					});
