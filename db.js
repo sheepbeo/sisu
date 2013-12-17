@@ -496,34 +496,62 @@ function searchData(data,callback){
 }
 
 function upload(mode,data,callback){
-		var ext = data.type,
-			theUrl = dbURL;
-		
-		if (mode == 'PUT'){
-			ext = data.type + '/' + escape(data._id);
-		}
+	var ext = data.type,
+		theUrl = dbURL;
+	
+	if (mode == 'PUT'){
+		ext = data.type + '/' + escape(data._id);
+	}
 
-		if (ext){
-			theUrl += '/'+ext;
-		}
+	if (ext){
+		theUrl += '/'+ext;
+	}
 
-		$.ajax({
-			url:theUrl,
-			type:mode,
-			dataType:'JSON',
-			data:JSON.stringify(data),
-			contentType: 'application/json',
-			success:function(result){					
-				if (result.ok == true || result.ok == 'true'){
-					result.dataTimeStamp = data.timeStamp;
-					callback(result);
-				} else {
-					callback(false);
-				}
-			},
-			error:function(result){
+	$.ajax({
+		url:theUrl,
+		type:mode,
+		dataType:'JSON',
+		data:JSON.stringify(data),
+		contentType: 'application/json',
+		success:function(result){					
+			if (result.ok == true || result.ok == 'true'){
+				result.dataTimeStamp = data.timeStamp;
+				callback(result);
+			} else {
 				callback(false);
 			}
+		},
+		error:function(result){
+			callback(false);
+		}
+	});
+}
+
+function deleteData(data,callback) {
+	var	theUrl = dbURL;
+
+	ext = data.type + '/' + escape(data._id);
+
+	if (ext){
+		theUrl += '/'+ext;
+	}
+
+	$.ajax({
+		url:theUrl,
+		type:'DELETE',
+		dataType:'JSON',
+		contentType: 'application/json',
+		success:function(result){					
+			if (result.ok == true || result.ok == 'true'){
+				result.dataTimeStamp = data.timeStamp;
+				callback(result);
+			} else {
+				callback(false);
+			}
+		},
+		error:function(result){
+			callback(false);
+		}
 	});
 }
 
