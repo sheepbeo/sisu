@@ -34,6 +34,9 @@ function layerEditor(){
 	this.targetidinput = $('<input class="targetcollectionid" type="text" placeholder="target-id"/>');
 	this.pageidinput = $('<input class="pageid" type="text" placeholder="page-id"/>');
 
+	// labels:
+	this.labels = $('<div style="position:absolute; bottom:130px; left:40px;">next slide ---------- Page linked</div>');
+
 	// making dropinputs for drag and drop page and next slide(itemcollection):
 	this.pageinputcontainer = $('<div class="dropinput-container"></div>');
 	this._nextslideinput = new targetDropInput();
@@ -63,6 +66,7 @@ function layerEditor(){
 
 	// append dropinputs:
 	//this.inputwindow.append(this._pageinput.getElement());
+	this.inputwindow.append(this.labels);
 	this.inputwindow.append(this.pageinputcontainer);
 	
 	this.inputwindow._container.css('height','300px');
