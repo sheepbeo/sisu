@@ -202,12 +202,39 @@ var pagebuilder = {
 			}
 
 			return c;
+		} else if (item.tag == 'sub-left'){
+			var sl = $('<div class="sub-left">'+getText(item.text)+'</div>');
+			return sl;
+
+		} else if (item.tag == 'sub-right'){
+			var sr = $('<div class="sub-right">'+getText(item.text)+'</div>');
+			return sr;
+
+		} else if (item.tag == 'quote'){
+			var q = $('<div class="quote-container"></div>');
+			var qleftside = $('<div class="quote-container-left"></div>');
+			var qrightside = $('<div class="quote-container-right"></div>');
+
+
+			var qbegin = $('<div class="quote-begin"><i class="fa fa-quote-left"></div>');
+			var qcontent = $('<div class="quote-content">'+getText(item.text)+'</div>');
+			var qend = $('<div class="quote-end"><i class="fa fa-quote-right"></div>');
+
+			q.append(qleftside);
+			qleftside.append(qbegin);
+			q.append(qrightside);
+			qrightside.append(qcontent);
+			qrightside.append(qend);
+			//q.append(qend);
+
+			return q;
+
 		} else if (item.tag == 'music'){
 			var m = $('<audio controls><source src="' + item.musicurl.fin + '" type="audio/mpeg"><source src="' + item.musicurl.fin + '" type="audio/ogg">Your browser does not support this audio format.</audio>');
 			return m;
 
 		} else if (item.tag == 'video'){
-			var v = $('<video controls><source src="' + item.videourl.fin + '" type="video/mp4"><source src="' + item.videourl.fin + '" type="video/ogg">Your browser does not support this audio format.</video>');
+			var v = $('<video controls width="300"><source src="' + item.videourl.fin + '" type="video/mp4"><source src="' + item.videourl.fin + '" type="video/ogg">Your browser does not support this audio format.</video>');
 			return v;
 
 		} else {

@@ -417,6 +417,46 @@ body{
 	width: 100%;
 }
 
+#sidebar-content .sub-left {
+	text-align: left;
+	font-size: 15px;
+	line-height: 20px;
+}
+
+#sidebar-content .sub-right {
+	text-align: right;
+	font-size: 15px;
+	line-height: 20px;
+}
+
+#sidebar-content .quote-begin {
+	display: inline-block;
+}
+
+#sidebar-content .quote-end {
+	display: inline;
+	padding-left: 1em;
+}
+
+
+#sidebar-content .quote-content {
+	font-style: italic;
+	font-size: 20px;
+	line-height: 26px;
+
+	display: inline;
+}
+
+#sidebar-content .quote-container-left {
+	float: left;
+	width: 10%;
+}
+
+#sidebar-content .quote-container-right {
+	float: right;
+	width: 90%;
+}
+
 
 /* ########## Minimap style ############*/
 
