@@ -280,8 +280,7 @@ var layerLoader = {
 
 			marker.properties  = data.properties;
 			
-			
-			var img = getImage(data.icon);			
+					
 			var css = '';
 			var icon = getIcon(data.markericon);
 			var style = layerLoader.presentation._style.presentation.markerstyle;
@@ -289,7 +288,9 @@ var layerLoader = {
 			for (var i in icon.css){
 				css += i +':'+icon.css[i] +';';
 			}
-
+			
+			//getting image of exact size as needed in the marker, php script will crop it if needed
+			var img = getImage(data.icon, [parseInt(icon.css.width),parseInt(icon.css.height)]);	
 			var divimg = '';
 			var textcontainer = '';
 			if (data.properties.description){
@@ -297,19 +298,20 @@ var layerLoader = {
 			}
 
 			if (data.icon.name != '' && data.icon.name != 'image'){
-				divimg = '<img class="marker-icon-image" style="'+css+'" src="'+img+'"></img>';
+				divimg = '<img class="marker-icon-image" style="'+css+'" src="'+ img +'"></img>';
 			} 
 			
-			var html = '<div style="position:relative;overflow:hidden;background-repeat:no-repeat;background-size:cover;background-image:url('+markerIconsURL+'/'+icon.icon.url+'); width:'+icon.icon.size[0]+'px; height:'+icon.icon.size[1]+'px" class="marker-icon-imagecontainer">'+divimg+'</div>';
+			var html = '<div style="position:relative;overflow:hidden;background-repeat:no-repeat;background-size:cover;  background-image:url('+markerIconsURL+'/'+icon.icon.url+'); width:'+icon.icon.size[0]+'px; height:'+icon.icon.size[1]+'px" class="marker-icon-imagecontainer">'+divimg+'</div>';
 			html += textcontainer;
 
 			if (getText(data.properties.name) != ''){
+				//TODO get rid of textcss
 				if (icon.textcss != undefined) {
 					var textcss ='';
 					for (var i in icon.textcss){
-						textcss += i +':'+icon.textcss[i] +';';
+							textcss += i +':'+icon.textcss[i] +';';
 					} 
-					html+= '<div style="' + textcss + '">' +getText(data.properties.name)+ '</div>';
+					html+= '<div class= "marker-title" style="' + textcss + '">' +getText(data.properties.name)+ '</div>';
 				} else {
 					html += '<div class="hide-on-zoom arrow-small-up"></div>';				
 					html += '<span class="hide-on-zoom marker_name_text">'+getText(data.properties.name)+'</span>';

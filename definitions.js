@@ -27,23 +27,16 @@ var markericons = [
 		},
 		_id:'markericon_square_white',
 		css:{
-			'width':'160px',
-			'height':'120px',
+			'width':'165px',
+			'height':'126px',
 			'border-radius':'0px',
 			'position':'absolute',
-			'top':'20px',
-			'left':'20px'
+			'top':'17px',
+			'left':'17px'
 		},
+
 		textcss:{
-			'border-radius':'0px',
-			'position':'absolute',
-			'bottom':'30px',
-			'left':'0',
-			'right':'0',
-			'margin-left':'auto',
-			'margin-right':'auto',
-			'font-size': '15pt',
-			'text-align': 'center'
+			'bottom': '26px'
 		}
 	},
 	{
