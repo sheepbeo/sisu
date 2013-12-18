@@ -548,8 +548,9 @@ presentation.prototype = {
 			this._mainmenu.show();
 		}
 		
+		$('#TermNCondLink').appendTo('.leaflet-bottom.leaflet-left:first');
 		// attach the terms and conditions page to the link:
-		$('#TermNCondLink').click(function() {
+		$('#TermNCondLinkText').click(function() {
 			if (me._termsandconditions != undefined) {
 				me.action("showonly", {_id: me._termsandconditions, type: "page"}, {properties:{}});
 			}

@@ -335,15 +335,32 @@ body{
 
 
 #TermNCondLink {
-	position:absolute;
-	left:300px;
-	bottom:40px;
-	font-size: 15px;
-	color:white;
-	border-bottom: 2px white dotted;
+	pointer-events: all;
+	padding: 200px;
+	display: inline-block;
+/* 	float:left; */
+/* 	//margin-left: -50px; */
+/*  	margin-bottom: 200px;  */
+	position:absolute;  
+	width: -10px;
+	bottom:0px; 
+
 }
 
-#TermNCondLink:hover {
+#TermNCondLinkTextWrapper {
+	font-size: 15px;
+	margin-bottom: -195px;
+	padding-top: 135px;
+	margin-left: -150px;
+}
+
+#TermNCondLinkText {
+	color:white;
+	width: 130px;
+	border-bottom: 2px white dotted;
+} 
+
+#TermNCondLinkText:hover {
 	cursor:pointer;
 }
 
