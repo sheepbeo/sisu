@@ -82,7 +82,7 @@ function layerEditor(){
 	
 	//## Drawing init
 	this._drawnItems = new L.FeatureGroup();
-	map.map.addLayer(this._drawnItems); //TODO check that we remove them on new item collection
+	this._layer.addLayer(this._drawnItems); //TODO check that we remove them on new item collection
 	
 	this._drawControl = new L.Control.Draw({
 		position: 'bottomleft',
