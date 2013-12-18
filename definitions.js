@@ -11,7 +11,7 @@ var repositoryURL = 'http://touch.mobile.metropolia.fi/es/susi/marker/';
 var IMGURL = 'http://touch.mobile.metropolia.fi/image.php';
 var IMGFOLDER = 'http://touch.mobile.metropolia.fi/img/';
 var iconURL = 'http://touch.mobile.metropolia.fi/icons/';
-var PAGESTYLES = ['gallery','normal','page'];
+var PAGESTYLES = ['normal','page','gallery'];
 var markerIconsURL = 'markericons';
 
 // idle time counted for refreshing the presentation

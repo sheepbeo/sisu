@@ -19,6 +19,9 @@ function pageEditor(){
 	this.addTool('img/check-alt.png','save','save and exit');
 	this.addTool('img/announce.png','createInput:h2','create header');
 	this.addTool('img/script.png','createInput:p','add paragraph');
+	this.addTool('img/small_left_align.png','createInput:sub-left','add subtext left align');
+	this.addTool('img/small_right_align.png','createInput:sub-right','add subtext right align');
+	this.addTool('img/quote.png','createInput:quote','add quote');
 	this.addTool('img/MD-photo.png','createInput:img','add image');
 	this.addTool('img/music.png','createInput:music','add music');
 	this.addTool('img/video.png','createInput:video','add video');
@@ -223,7 +226,7 @@ function pageInput(tag,page){
 
 pageInput.prototype = {
 	load:function(data){
-		this.text = data.text;
+		this.text = data.text; // load data for p , h2 , sub-left, sub-right, quote, also for music and video
 		
 		if (this._tag == 'img'){
 			var e = data.img;
@@ -321,22 +324,19 @@ pageInput.prototype = {
 			break;
 			//field = $('<div class="pageeditor_imginput" contentEditable="true" />');
 			//break;
-			case 'music':
-				field = $('<textarea class="'+this._tag+'"/>');
-			break;
-
-			case 'video':
-				field = $('<textarea class="'+this._tag+'"/>');
-			break;
-
 			case 'p':
+			case 'sub-left':
+			case 'sub-right':
+			case 'quote':
+			case 'music':
+			case 'video':
 				field = $('<textarea class="'+this._tag+'"/>');
 			break;
 		}
 
 		var me = this;
 		
-		if (field != false){
+		if (field !== false){
 			
 			rmbutton.click(function(){
 				me._element.remove();
