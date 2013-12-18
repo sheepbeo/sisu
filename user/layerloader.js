@@ -187,7 +187,7 @@ var layerLoader = {
 							//console.log(pagecontent);
 							sidebarContent.append(pagecontent.html());
 
-							sidebarContent.append(buttonNext);
+							sidebar.append(buttonNext);
 						}
 
 					});

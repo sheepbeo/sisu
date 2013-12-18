@@ -52,7 +52,7 @@ picker.prototype.getList = function(type){
 				me.addItem(data[i]);
 			}
 		}
-	});
+	}, 10000);
 };
 
 picker.prototype.addItem = function(item){
