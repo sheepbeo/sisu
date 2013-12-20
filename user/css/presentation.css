@@ -375,12 +375,12 @@ body{
 	font-size: 20px;
 	position: absolute;
 	float: right;
- 	bottom: 1em;
-	right: 1em;
+ 	bottom: 30px;
+	right: 30px;
 	
 /* 	margin-right: auto;
-	margin-left: auto; */
-	margin-bottom: 30px;
+	margin-left: auto; 
+	margin-bottom: 30px; */
 	
 	border-radius: 0.2em;
 	font-weight: bold;
@@ -405,11 +405,21 @@ body{
 	max-height: 860px;
 	opacity: 0.95;	
 	bottom: 40px;
+	overflow: hidden;
 }
 
 #sidebar-content {
-	padding: 40px;
+	/* padding: 40px;
 	padding-top: 30px;
+	
+	padding-bottom: 30px; */
+	overflow: hidden;
+	position: absolute;
+	top: 30px;
+	bottom: 90px;
+	left: 40px;
+	right: 40px;
+
 }
 
 #sidebar-content p {
@@ -432,6 +442,7 @@ body{
 
 .imagecontainer-page-content img{
 	width: 100%;
+	margin-top: 10px;
 }
 
 #sidebar-content .sub-left {
@@ -444,6 +455,13 @@ body{
 	text-align: right;
 	font-size: 15px;
 	line-height: 20px;
+}
+
+#sidebar-content .quote-container {
+	display: block;
+	overflow: hidden;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
 }
 
 #sidebar-content .quote-begin {

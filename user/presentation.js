@@ -552,7 +552,12 @@ presentation.prototype = {
 		// attach the terms and conditions page to the link:
 		$('#TermNCondLinkText').click(function() {
 			if (me._termsandconditions != undefined) {
-				me.action("showonly", {_id: me._termsandconditions, type: "page"}, {properties:{}});
+				var item = {};
+				item._id = me._termsandconditions;
+
+				itemLoader.load(item,function(ditem){					
+					ditem.show();
+				});
 			}
 		});
 
