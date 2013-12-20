@@ -383,7 +383,7 @@ map.prototype.removeLayer = function(layer){
 }
 // removes layer by its id number
 map.prototype.removeLayerById = function(id){
-	this.removeLayer(this._layers[id])
+	if(this._layers[id]) this.removeLayer(this._layers[id])
 }
 
 map.prototype.drawLine = function(line,opts){

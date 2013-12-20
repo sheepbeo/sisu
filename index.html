@@ -133,8 +133,9 @@
 	function launchPresentationMainScreen(id){
 		if (typeof(id) == 'string'){
 			$("#wrapper").show();
-			var p = new presentation(id);	
-			if (p) {
+			//global var is used to reset presentation on global errors
+			this.SUSI_CURRENT_PRESENTATION = new presentation(id);	
+			if (SUSI_CURRENT_PRESENTATION) {
 				clearView();
 			}
 		}
@@ -166,6 +167,16 @@
 	$(document).ready(function(){
 		$('body').bind('touchmove', function(event) { event.preventDefault() }); // ipad prevent
 		
+		SUSI_GLOBAL_ERROR_IS_PROVESSED = false;
+		window.onerror = function() {
+			if(!SUSI_GLOBAL_ERROR_IS_PROVESSED) {
+				SUSI_GLOBAL_ERROR_IS_PROVESSED = true;
+				alert("Unexpected error occured, presentation will be realoaded. We are sorry for inconviences.");
+				SUSI_GLOBAL_ERROR_IS_PROVESSED = false;
+				location.reload();
+			}
+		};
+
 		var presentationName = window.location.search;	
 		
 		if (presentationName.substr(0,1) == '?'){
