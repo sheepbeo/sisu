@@ -335,7 +335,6 @@ body{
 
 
 #TermNCondLink {
-	pointer-events: all;
 	padding: 200px;
 	display: inline-block;
 /* 	float:left; */
@@ -355,6 +354,7 @@ body{
 }
 
 #TermNCondLinkText {
+ 	pointer-events: all; /*Pointer events allowed only now, to prevent blocking clicks by padding horror I did :) */
 	color:white;
 	width: 130px;
 	border-bottom: 2px white dotted;

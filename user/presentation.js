@@ -381,7 +381,7 @@ presentation.prototype = {
 // 			this.buildLogo();
 // 		}
 	
-		if(data.properties.menu){
+		if(this._style.showMainmenu() && data.properties.menu){
 			var menustyle = this._style.getStyle('mainmenu').data.style;
 			
 			//if (menustyle == 'buttons'){
