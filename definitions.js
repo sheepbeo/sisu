@@ -196,6 +196,16 @@ var tileLayers = {
 						return layer;
 					}
 				},
+				mapboxtest: {
+					name:'MapBoxTest',
+					description:'Mapbox mapping service, commercial license',
+					image:'',
+					map:function(){
+						var layer = new L.TileLayer('https://{s}.tiles.mapbox.com/v3/susimap.h45eflg4/{z}/{x}/{y}.png', tileLayerOptions);
+						return layer;
+					}
+				},
+				
 				cloudmade:{
 					name:'Cloudmade',
 					description:'Cloudmade mapping services, commercial license',
