@@ -413,7 +413,7 @@ body{
 	padding-top: 30px;
 	
 	padding-bottom: 30px; */
-	overflow: hidden;
+	overflow: scroll;
 	position: absolute;
 	top: 30px;
 	bottom: 90px;
