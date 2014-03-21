@@ -89,20 +89,7 @@ function bulkUpload(data,callback){
 
 }
 
-function getPageImages(names){
-	
-	if (names instanceof Array){
-		var imgs = [];
-		for (var i in names){
-			imgs.push(getPageImages(names[i]));
-		}
-		return imgs;
 
-	} else {		
-		var img =$('<img src="'+IMGURL + '?img='+names+'&full=true"></img>');
-		return img;
-	}
-}
 
 function getFullImage(name){
 	if (typeof(name) == 'object'){

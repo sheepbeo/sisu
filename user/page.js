@@ -1,3 +1,5 @@
+var _overlay_image_id_count = 0;
+
 var pagebuilder = {
 	getBase : function(){
 		var el = {
@@ -195,9 +197,14 @@ var pagebuilder = {
 			var c = [];
 			
 			for (var i in item.img){
-				var a = $('<div class="imagecontainer-page-content" />');
+				var a = $('<div class="imagecontainer-page-content" id="' + _overlay_image_id_count + '_overlay_image"></div>');
+				_overlay_image_id_count++; // SUPER BAD CODE T-T
+				
 				var imgs = getPageImages(item.img[i]);
 				a.append(imgs);
+				
+				this.prepareImageOverlay(a);
+				
 				c.push(a);
 			}
 
@@ -243,6 +250,46 @@ var pagebuilder = {
 			setTextData(eitem,item.text);
 			return eitem;
 		}
+	},
+	
+	prepareImageOverlay: function(imagediv) {
+		$(document).on("click", "#" + imagediv.attr('id'), function(e) {
+			var overlay = $('<div class="overlay"></div>');
+			overlay.css({
+				width:'100%',
+				height:'100%',
+				position:'fixed',
+				left:'0px',
+				top:'0px',
+				'background-color':'rgba(0,0,0,0.7)',
+				'opacity':1,
+				'z-index': 10000
+			});
+			
+			var image = $('<img src="' + imagediv.children(":first").attr("src") + '" >');
+			image.css({
+				'display':'block',
+				'max-width':'1000px',
+				'min-width':'100px',
+				'max-height':'600px',
+				'margin-left':'auto',
+				'margin-right':'auto',
+				'margin-top':'100px',
+				'vertical-align':'center'
+				
+			});
+			overlay.append(image);
+			
+			console.log(imagediv.children(":first").attr("src"));
+			
+			
+			overlay.click(function() {
+				overlay.remove();
+			});
+
+			$('#wrapper').append(overlay);
+		});
+		/**/
 	}
 };
 
@@ -281,6 +328,20 @@ function page(data){
 	}
 }
 
+function getPageImages(names){
+	if (names instanceof Array){
+		var imgs = [];
+		for (var i in names){
+			imgs.push(getPageImages(names[i]));
+		}
+		return imgs;
+
+	} else {
+		var img =$('<img src="'+IMGURL + '?img='+names+'&full=true"></img>');
+		return img;
+	}
+}
+
 page.prototype = {
 	applyOverlay:function(){
 		var overlay = $('<div class="overlay"></div>');
@@ -306,7 +367,7 @@ page.prototype = {
 		var me = this;
 		overlay.click(function(){
 			me.remove();
-		})
+		});
 
 		this._overlay = overlay;
 	},
