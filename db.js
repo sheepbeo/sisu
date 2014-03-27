@@ -89,8 +89,6 @@ function bulkUpload(data,callback){
 
 }
 
-
-
 function getFullImage(name){
 	if (typeof(name) == 'object'){
 		name = name.name;

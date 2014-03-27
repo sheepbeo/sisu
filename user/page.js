@@ -237,7 +237,52 @@ var pagebuilder = {
 			return q;
 
 		} else if (item.tag == 'music'){
-			var m = $('<audio controls><source src="' + item.musicurl.fin + '" type="audio/mpeg"><source src="' + item.musicurl.fin + '" type="audio/ogg">Your browser does not support this audio format.</audio>');
+			// var m = $('<audio controls preload="metadata"><source src="' + item.musicurl.fin + '" type="audio/mpeg"><source src="' + item.musicurl.fin + '" type="audio/ogg">Your browser does not support this audio format.</audio>');
+			var m = $('<div id="jquery_jplayer_' + _overlay_image_id_count + '" class="jp-jplayer"></div>'+
+						  '<div id="jp_container_1" class="jp-audio">  <div class="jp-type-single">'+
+							  '<div class="jp-title">'+
+								
+							  '</div>'+
+							  '<div class="jp-gui jp-interface">'+
+								'<ul class="jp-controls">'+
+								'<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>'+
+								'<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>'+
+								'</ul>'+
+								'<div class="jp-progress">'+
+								  '<div class="jp-seek-bar">'+
+								  '<div class="jp-play-bar"></div>'+
+								 ' </div>'+
+								'</div>'+
+								
+								'<div class="jp-time-holder">'+
+								  '<div class="jp-current-time"></div>'+
+								  '<div class="jp-duration"></div>'+
+								'</div>'+
+							  '</div>'+
+							  
+							  '<div class="jp-no-solution">'+
+								'<span>Update Required</span>'+
+								'To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.'+
+							  '</div>'+
+							'</div>'+
+						  '</div> ');
+  
+			$(document).ajaxComplete(function(){
+			 $("#jquery_jplayer_" + _overlay_image_id_count).jPlayer({
+				ready: function () {
+				   $(this).jPlayer("setMedia", {
+					// m4a: "http://www.jplayer.org/audio/m4a/Miaow-07-Bubble.m4a",
+					// oga: "http://www.jplayer.org/audio/ogg/Miaow-07-Bubble.ogg"
+					mp3: musicURL + item.musicurl.fin
+				  });
+				},
+				swfPath: "lib/jqueryjplayer/",
+				supplied: "mp3"
+			  });
+			});
+			/**/
+			
+
 			return m;
 
 		} else if (item.tag == 'video'){
