@@ -188,7 +188,18 @@ var tileLayers = {
 					}
 				},
 	*/
+	
 				mapbox: {
+					name:'MapBox',
+					description:'Mapbox mapping service, commercial license',
+					image:'',
+					map:function(){
+						var layer = new L.TileLayer('https://{s}.tiles.mapbox.com/v3/mapoutanen.hm3emn52/{z}/{x}/{y}.png', tileLayerOptions);
+						return layer;
+					}
+				},
+				
+				mapbox_old: {
 					name:'MapBox',
 					description:'Mapbox mapping service, commercial license',
 					image:'',
@@ -197,6 +208,7 @@ var tileLayers = {
 						return layer;
 					}
 				},
+				
 				mapboxtest: {
 					name:'MapBoxTest',
 					description:'Mapbox mapping service, commercial license',
