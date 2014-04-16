@@ -188,6 +188,18 @@ var layerLoader = {
 							sidebarContent.append(pagecontent.html());
 
 							sidebar.append(buttonNext);
+							
+							$('#wrapper').find('.iscroll').each(function(){
+									//var sc = new iScroll(this.id,{lockDirection:false,hideScrollbar:false});
+									//var sc = new iScroll(this.id,{lockDirection:false,hideScrollbar:true, useTransform: false,useTransition: true});
+									//console.log($("#sidebar-content").height());
+									$(this).slimScroll({height:$("#sidebar-content").height()});
+									//$('#' + this.id).smoothTouchScroll();
+								});
+							//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+							/**/
+							
+							//$('#sidebar-content').tinyscrollbar();
 						}
 
 					});

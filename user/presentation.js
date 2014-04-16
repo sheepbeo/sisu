@@ -557,6 +557,7 @@ presentation.prototype = {
 
 				itemLoader.load(item,function(ditem){					
 					ditem.show();
+					console.log(ditem);
 				});
 			}
 		});

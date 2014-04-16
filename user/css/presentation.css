@@ -405,7 +405,6 @@ body{
 	max-height: 860px;
 	opacity: 0.95;	
 	bottom: 40px;
-	overflow: hidden;
 }
 
 #sidebar-content {
@@ -413,7 +412,10 @@ body{
 	padding-top: 30px;
 	
 	padding-bottom: 30px; */
-	overflow: scroll;
+/*	overflow: scroll; */
+	/* overflow: hidden; */
+	overflow: hidden;
+	
 	position: absolute;
 	top: 30px;
 	bottom: 90px;
@@ -490,6 +492,10 @@ body{
 #sidebar-content .quote-container-right {
 	float: right;
 	width: 90%;
+}
+
+#plainContentTextWrapper {
+	
 }
 
 
