@@ -323,10 +323,15 @@ map.prototype.zoomIntoPan = function(bounds){
 		};
 
 		me._onTransition = true;
+		
+		var blockUserInput = $('<div class="overlay" style="position:fixed; left:0px; top:0px; width:100%; height:100%; z-index:20000"></div>');
+		$('#wrapper').append(blockUserInput);
 
 		this._map.panTo(bounds.getCenter(), options);
 		setTimeout(function() { me._onTransition = false; me._map.setZoomAround(bounds.getCenter(), zoom, options); }, 1*1000 + 100);
-
+		
+		setTimeout(function() { blockUserInput.remove(); }, 1*1000 + 100);
+		
 		this.fire('fitbounds',bounds);
 	}
 }
@@ -340,6 +345,9 @@ map.prototype.jumpFromTo = function(origLL, destLL, finalZoom) {
 	};
 	var me = this;
 	var zoomMin = Math.min(me._map.getZoom(), finalZoom);
+	
+	var blockUserInput = $('<div class="overlay" style="position:fixed; left:0px; top:0px; width:100%; height:100%; z-index:20000"></div>');
+	$('#wrapper').append(blockUserInput);
 
 	var waitTime = 0;
 	setTimeout(function() { me._map.setZoomAround(origLL, zoomMin - 1, options); }, waitTime);
@@ -347,6 +355,8 @@ map.prototype.jumpFromTo = function(origLL, destLL, finalZoom) {
 	setTimeout(function() { me._map.panTo(destLL, options); }, waitTime);
 	waitTime += options.duration * 1000 + 500;
 	setTimeout(function() { me._onTransition = false; me._map.setZoomAround(destLL, finalZoom, options);  }, waitTime);
+	
+	setTimeout(function() { blockUserInput.remove(); }, waitTime);
 };
 
 // return all markers from layer
@@ -431,6 +441,7 @@ map.prototype.addLayer =function(layer){
 // false if layer is removed
 map.prototype.showLayer = function(id,callback){
 	var me = this;
+	
 	// if there is no that id visible, layer is loaded from database
 	if (this.hasLayer(id) == false){
 

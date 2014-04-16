@@ -1,4 +1,5 @@
 var _overlay_image_id_count = 0;
+var _music_id_count = 1;
 
 var pagebuilder = {
 	getBase : function(){
@@ -237,9 +238,10 @@ var pagebuilder = {
 			return q;
 
 		} else if (item.tag == 'music'){
+			$('#jquery_jplayer_' + (_music_id_count-1)).remove();
 			// var m = $('<audio controls preload="metadata"><source src="' + item.musicurl.fin + '" type="audio/mpeg"><source src="' + item.musicurl.fin + '" type="audio/ogg">Your browser does not support this audio format.</audio>');
-			var m = $('<div id="jquery_jplayer_' + _overlay_image_id_count + '" class="jp-jplayer"></div>'+
-						  '<div id="jp_container_1" class="jp-audio">  <div class="jp-type-single">'+
+			var m = $('<div id="jquery_jplayer_' + _music_id_count + '" class="jp-jplayer"></div>'+
+						  '<div id="jp_container_1' + '" class="jp-audio">  <div class="jp-type-single">'+
 							  '<div class="jp-title">'+
 								
 							  '</div>'+
@@ -266,15 +268,20 @@ var pagebuilder = {
 							  '</div>'+
 							'</div>'+
 						  '</div> ');
-  
+			
+			id = _music_id_count;
+			link = item.musicurl.fin;
+			
 			$(document).ajaxComplete(function(){
-			 $("#jquery_jplayer_" + _overlay_image_id_count).jPlayer({
-				ready: function () {
+			 $("#jquery_jplayer_" + id).jPlayer( "clearMedia" );
+			 $("#jquery_jplayer_" + id).jPlayer({
+				ready: function (args) {
 				   $(this).jPlayer("setMedia", {
 					// m4a: "http://www.jplayer.org/audio/m4a/Miaow-07-Bubble.m4a",
 					// oga: "http://www.jplayer.org/audio/ogg/Miaow-07-Bubble.ogg"
-					mp3: musicURL + item.musicurl.fin
+					mp3: musicURL + link
 				  });
+				  console.log(item.musicurl.fin);
 				},
 				swfPath: "lib/jqueryjplayer/",
 				supplied: "mp3"
@@ -282,7 +289,7 @@ var pagebuilder = {
 			});
 			/**/
 			
-
+			_music_id_count++;
 			return m;
 
 		} else if (item.tag == 'video'){

@@ -312,7 +312,7 @@ presentation.prototype = {
 						
 						var layer = me._map.getLayer(item._id);
 						if (layer.properties){
-							me.showLayerInfo(layer.properties);
+							me.showLayerInfo(layer.properties);							
 						}
 
 					}
