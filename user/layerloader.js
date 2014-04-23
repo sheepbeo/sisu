@@ -196,7 +196,7 @@ var layerLoader = {
 									$(this).slimScroll({
 										height:$("#sidebar-content").height(),
 										alwaysVisible: true,
-										//railVisible:true,
+										railVisible:true,
 										distance: '-7px'
 										});
 									//$('#' + this.id).smoothTouchScroll();
