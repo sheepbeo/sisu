@@ -193,7 +193,12 @@ var layerLoader = {
 									//var sc = new iScroll(this.id,{lockDirection:false,hideScrollbar:false});
 									//var sc = new iScroll(this.id,{lockDirection:false,hideScrollbar:true, useTransform: false,useTransition: true});
 									//console.log($("#sidebar-content").height());
-									$(this).slimScroll({height:$("#sidebar-content").height()});
+									$(this).slimScroll({
+										height:$("#sidebar-content").height(),
+										alwaysVisible: true,
+										//railVisible:true,
+										distance: '-7px'
+										});
 									//$('#' + this.id).smoothTouchScroll();
 								});
 							//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);

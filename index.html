@@ -64,7 +64,7 @@
 	</head>
 <script type="text/javascript">
 
-
+	var IS_DEBUGGING = false;
 
 	function showList(){
 		var c = $('<div id="listcontainer" />');
@@ -225,7 +225,13 @@
 	$( document ).ready(function() {
 	  console.log("complete");
 	});
-
+	
+	// stop right clicking in production mode
+	if (!IS_DEBUGGING) {
+		$(document).bind("contextmenu",function(e){
+			e.preventDefault();
+		});
+	}
 
 </script>
 

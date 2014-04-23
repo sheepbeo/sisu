@@ -11,12 +11,15 @@
 }
 
 .pagecontainer.onepage .imagescroll{
+	/*
 	background-color: #eee;
-	background-image: url('../img/debut_dark.png');
-	border-bottom: 1px solid #000;
+	background-image: url('../img/debut_dark.png'); 
+	border-bottom: 1px solid #000; */
 	text-align:center;
+	/*
 -webkit-box-shadow: inset 0px -20px 50px -30px rgba(0, 0, 0, 1);        
         box-shadow: inset 0px -20px 50px -30px rgba(0, 0, 0, 1);	
+		*/
 }
 
 .pagecontainer.onepage .imagescroll img{
