@@ -104,7 +104,7 @@ var pagebuilder = {
 					el.imagecontainer.append(imgs[i]);
 				}
 
-				el.imagecontainer.addClass('imagescroller');
+				//el.imagecontainer.addClass('imagescroller');
 			} else {
 				el.textcontainer.append(e);
 			}
@@ -124,18 +124,20 @@ var pagebuilder = {
 
 
 		if (el.imagecontainer.find('img').length > 0){
+			el.imagescroll.css({
+				height: 150
+			});
+			
 			el.textscroll.css({			
-				height:window.innerHeight/3+'px',
+				height: el.container.height()-el.imagescroll.height(),
 				overflow:'hidden'			
 			});
 
-			el.imagescroll.css({
-				height:(el.container.height()-el.textscroll.height())-30
-			})
+			
 
 			el.imagecontainer.css({
-				height:el.imagescroll.height()-30,
-				'margin-top':'15px'
+				height:el.imagescroll.height(),
+				//'margin-top':'0px'
 			});
 		} else {
 			el.textscroll.css({			
@@ -467,7 +469,6 @@ page.prototype = {
 			opacity:0
 		}).addClass('hidden-zoomed');
 
-
 		var me = this;
 		
 		this._overlay.append('<h2>LOADING</h2>');
@@ -480,16 +481,20 @@ page.prototype = {
 			
 			me._element.find('.imagecontainer').animate({
 				opacity:1
-			},500);
+			},200);
 
 			setTimeout(function(){
 				ready();
-			},700);
+			},300);
 			
 			me._element.css({
 				opacity:1
 			}).removeClass('hidden-zoomed')
 			
+			
+			me._element.click(function(){
+				me.remove();
+			});
 		});
 
 		function ready(){

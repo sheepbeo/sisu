@@ -560,6 +560,11 @@ presentation.prototype = {
 					console.log(ditem);
 				});
 			}
+			
+			$('#TermNCondLinkText').css('display', 'none');
+			setTimeout(function() {
+				$('#TermNCondLinkText').css('display', 'block');
+			}, 300);
 		});
 
 		//go to langing slide - first slide
